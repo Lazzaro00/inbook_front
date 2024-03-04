@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 
 export const routes: Routes = [
   {
-   /* path: "",
+    path: "",
     // canActivateChild: [AuthGuard],
     children: [
       {
@@ -10,7 +10,14 @@ export const routes: Routes = [
         redirectTo: "login", // Modifica qui: da 'gestionale' a 'login'
         pathMatch: "full",
       },
+
       {
+        path: "signup",
+        loadChildren: () =>
+          import("./modules/authentication/authetication.routing").then((m) => m.routes),
+      },
+
+      /*{
         path: "gestionale",
         loadChildren: () =>
           import("").then(
@@ -24,12 +31,8 @@ export const routes: Routes = [
             (m) => m.routes
           ),
       },
-      {
-        path: "login",
-        loadChildren: () =>
-          import("").then((m) => m.routes),
-      },
+      */
     ],
-  */},
+  },
   { path: "**", redirectTo: "login", pathMatch: "full" },
 ];
