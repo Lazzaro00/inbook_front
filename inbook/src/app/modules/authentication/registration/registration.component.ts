@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-registration',
   templateUrl: 'registration.component.html',
-  styleUrl: 'registration.component.css',
+  styleUrl: 'registration.component.scss',
   standalone: true,
   imports: [
     RouterModule,
@@ -26,14 +26,20 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
   ],
 })
-export class StepperOverviewExample {
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+export class RegistrationComponent {
+  registrationUserForm = this._formBuilder.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+    confirm_password: ['', Validators.required]
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-  isLinear = false;
+  isLinear = true;
 
   constructor(private _formBuilder: FormBuilder) {}
+}
+
+export function route(): any {
+  throw new Error("Function not implemented.");
 }

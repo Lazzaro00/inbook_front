@@ -7,12 +7,6 @@ export const routes: Routes = [
     children: [
       {
         path: "",
-        redirectTo: "login", // Modifica qui: da 'gestionale' a 'login'
-        pathMatch: "full",
-      },
-
-      {
-        path: "signup",
         loadChildren: () =>
           import("./modules/authentication/authetication.routing").then((m) => m.routes),
       },
