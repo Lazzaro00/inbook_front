@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, AbstractControl} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -26,7 +26,10 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
   ],
 })
+
 export class RegistrationComponent {
+  buttonDisabled:boolean = true;
+
   registrationUserForm = this._formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -37,9 +40,26 @@ export class RegistrationComponent {
   });
   isLinear = true;
 
-  constructor(private _formBuilder: FormBuilder) {}
-}
+  constructor(private _formBuilder: FormBuilder) {
 
-export function route(): any {
+    var confirmPassword = this.registrationUserForm.get("confirm_password")
+
+    if(confirmPassword != null){
+    confirmPassword.valueChanges.subscribe(x => {
+      if(this.registrationUserForm.value.password == this.registrationUserForm.value.confirm_password){
+        console.log("UGUALE", this.buttonDisabled)
+        this.buttonDisabled = true;
+      }else{
+        this.buttonDisabled = false;
+      }
+      
+   })
+  }
+
+}
+}
+  
+  export function route(): any {
   throw new Error("Function not implemented.");
 }
+
