@@ -30,10 +30,50 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+      <form [formGroup]="secondFormGroup" class="login-form">
+        <mat-form-field id="firstdiv">
+          <mat-label>Cognome</mat-label>
+          <input matInput formControlName="cognome" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field id="firstdiv">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" placeholder=""
+                 required>
+        </mat-form-field>
+
+        <mat-form-field id="firstdiv">
+          <mat-label>Data di Nascita</mat-label>
+          <input formControlName="datadinascita" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field id="firstdiv">
+          <mat-label>Genere</mat-label>
+          <mat-select>
+            @for (genere of genere; track genere) {
+              <mat-option [value]="genere.value">{{genere.viewValue}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Nazionalità</mat-label>
+          <input matInput formControlName="nazionalita" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Provincia</mat-label>
+          <input matInput formControlName="provincia" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Città di residenza</mat-label>
+          <input matInput formControlName="cdr" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Indirizzo di residenza</mat-label>
+          <input matInput formControlName="idr" placeholder=""
                  required>
         </mat-form-field>
         <div>
