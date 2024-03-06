@@ -63,21 +63,18 @@ export class RegistrationComponent {
 
   constructor(private _formBuilder: FormBuilder) {
 
-    var confirmPassword = this.registrationUserForm.get("confirm_password")
-
-    if(confirmPassword != null){
-    confirmPassword.valueChanges.subscribe(x => {
-      if(this.registrationUserForm.value.password == this.registrationUserForm.value.confirm_password){
-        console.log("UGUALE", this.buttonDisabled)
-        this.buttonDisabled = true;
-      }else{
-        this.buttonDisabled = false;
-      }
-      
-   })
+  this.registrationUserForm.valueChanges.subscribe(() => {
+        const password = this.registrationUserForm.get('password')?.value;
+        const confirmPassword = this.registrationUserForm.get('confirm_password')?.value;
+  
+        if (password === confirmPassword) {
+          this.buttonDisabled = false;
+        } else {
+          this.buttonDisabled = true;
+        }
+      });
+  
   }
-
-}
 }
   
   export function route(): any {
