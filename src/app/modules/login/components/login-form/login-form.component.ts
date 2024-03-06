@@ -169,10 +169,7 @@ export default class LoginFormComponent {
 
   /** Effettua la navigazione alla pagina di registrazione */
   gotoRegistrazione(): void {
-    this.dialog.open(WorkInProgressComponent, {
-      width: '660px',
-      height: '300px',
-      disableClose: true,
-    });
+    console.log("spinto")
+    this.router.navigate(['/login/signup']);
   }
 }

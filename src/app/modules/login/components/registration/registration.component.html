@@ -1,0 +1,84 @@
+<div class = "login-form-container">  
+  REGISTRATI
+  <mat-stepper [linear]="isLinear" #stepper >
+    <mat-step [stepControl]="registrationUserForm" >
+      <form [formGroup]="registrationUserForm" class = "login-form">
+        <ng-template matStepLabel>
+          <p class="title">Accesso</p></ng-template>
+        CREDENZIALI DI ACCESSO
+        <mat-form-field id="email">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field id="password">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+        </mat-form-field>
+        <mat-form-field id="password">
+          <mat-label>Conferma Password</mat-label>
+          <input 
+          matInput 
+          type="password" 
+          placeholder="Conferma Password" 
+          formControlName="confirm_password" 
+          required>
+        </mat-form-field>
+        <div>
+          <button [disabled]=buttonDisabled mat-button matStepperNext>Avanti</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup" class="login-form">
+        <mat-form-field id="firstdiv">
+          <mat-label>Cognome</mat-label>
+          <input matInput formControlName="cognome" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field id="firstdiv">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" placeholder=""
+                 required>
+        </mat-form-field>
+
+        <mat-form-field id="firstdiv">
+          <mat-label>Data di Nascita</mat-label>
+          <input formControlName="datadinascita" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field id="firstdiv">
+            <mat-label>Genere</mat-label>
+            <mat-select formControlName="genere">
+              <mat-option *ngFor="let gender of genere" [value]="gender.value">{{ gender.viewValue }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Nazionalità</mat-label>
+          <input matInput formControlName="nazionalita" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Provincia</mat-label>
+          <input matInput formControlName="provincia" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Città di residenza</mat-label>
+          <input matInput formControlName="cdr" placeholder=""
+                 required>
+        </mat-form-field>
+        <mat-form-field class="seconddiv">
+          <mat-label>Indirizzo di residenza</mat-label>
+          <input matInput formControlName="idr" placeholder=""
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

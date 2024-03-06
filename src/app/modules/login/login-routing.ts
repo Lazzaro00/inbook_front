@@ -14,6 +14,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./components/login-form/login-form.component'),
       },
+      {
+        path:"signup",
+        title: 'signup',
+        loadComponent: () =>
+          import("./components/registration/registration.component").then((m) => m.RegistrationComponent)
+      },
     ],
   },
 ];
