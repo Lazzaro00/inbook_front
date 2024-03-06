@@ -38,6 +38,10 @@ export class RegistrationComponent {
   isLinear = true;
 
   constructor(private _formBuilder: FormBuilder) {}
+
+  isNameValid() {
+    return this.registrationUserForm.pristine || this.registrationUserForm.valid;
+}
 }
 
 export function route(): any {
