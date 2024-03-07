@@ -132,16 +132,27 @@ export default class LoginFormComponent {
    * Nella callback salva il nominativo dell'utente nel localStorage e il token nel localStorage o sessionStorage (in base alla selezione remember me).
    * Viene poi effettuata la navigazione alla dashboard
    */
-  onSubmit() {
+  onSubmit(): void {
     this.loaderSpinnerService.show();
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          this.loginService.setUtenteSession(res?.username, res?.usertype);
-          this.router.navigate(['/gestionale/utenti']);
-          this.loaderSpinnerService.hide()
+          this.loginService.setUtenteSession(res?.email, res?.usertype, res?.jwt);
+          if (res.usertype == "USER") {
+            this.router.navigate(["/user"]);
+            this.loaderSpinnerService.hide();
+          } else if (res.usertype == "ADMIN") {
+            this.router.navigate(["/gestionale"]);
+            this.loaderSpinnerService.hide();
+          } else {
+            console.error(
+                res.usertype +
+                " non è riferito a nessun tipo di usertype! Aggiusta il campo usertype nel db ;) "
+            );
+          }
         },
         error: (error) => {
+          console.log(error)
           this.loaderSpinnerService.hide();
         },
       });

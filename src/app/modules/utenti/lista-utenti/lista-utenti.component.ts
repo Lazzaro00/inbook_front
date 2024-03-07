@@ -40,7 +40,7 @@ export default class ListaUtentiComponent {
   /** I tipi di celle dell'header */
   cellHeadTypes = {
     select: 'checkbox',
-    username: 'sort',
+    email: 'sort',
     usertype: 'sort'
   };
   /** Il valore del sort sulle colonne */
@@ -50,6 +50,7 @@ export default class ListaUtentiComponent {
   };
   /** La lista degli utenti */
   listaUtenti: any[] = [];
+  datePipe: any;
 
   /**
    * Il costruttore della classe
@@ -135,10 +136,10 @@ export default class ListaUtentiComponent {
       ];
       // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
       return {
-        id: r.id,
+        name: r.name,
+        surname: r.surname,
+        email: r.user.email,
         select: false,
-        username: r.username,
-        usertype: r.usertype,
         // dataCreazione: this.datePipe.trasform(r.dataCreazione, 'dd/MM/yyyy'),
         action: action,
       };

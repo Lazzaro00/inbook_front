@@ -12,14 +12,14 @@
         <div class="round-img-profile">
           <div class="profile-avatar">
             <p>
-              {{ (sessioneUtente.username | slice : 0 : 1 | uppercase) || ""
+              {{ (sessioneUtente.email | slice : 0 : 1 | uppercase) || ""
               }}
             </p>
           </div>
         </div>
         <span
           >
-          {{ sessioneUtente.username || "" | titlecase }}
+          {{ sessioneUtente.email || "" | titlecase }}
           </span
         >
         <button mat-icon-button class="example-icon">

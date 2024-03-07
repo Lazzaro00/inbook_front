@@ -25,11 +25,15 @@ export const INPUT_CONSTANT = {
   email_recupero: 'Email di recupero',
   campi_obbligatori: '* Campi obbligatori',
   quantita: 'Quantità',
+  name: 'Nome',
+  surname: 'Conome'
 };
 
 /** Costante con i testi da usare negli input di una tabella*/
 export const TABLE_INPUT_CONSTANT = {
-  username: 'Username',
+  email: 'Mail',
+  name: 'Nome',
+  surname: 'Conome',
   usertype: 'Ruolo',
   id: 'ID',
 };
@@ -43,5 +47,5 @@ export const TABLE_GROUP_ACTIONS_CONSTANT = [
 ];
 
 export const TABLE_COLUMNS = {
-  utenti: ['select', 'username', 'usertype', 'action'],
+  utenti: ['select', 'name', 'surname', 'email', 'action'],
 };
