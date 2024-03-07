@@ -20,5 +20,9 @@ export const SIDENAV_MENU_CONSTANT = [
     icon: 'person',
     path: '/gestionale/profilo',
   },
+  {
+    name: 'Libri',
+    path: '/book/get-all-book'
+  }
 
 ]
