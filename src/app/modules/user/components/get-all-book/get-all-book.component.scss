@@ -33,7 +33,17 @@
     }
   }
 
-  #getallbook{
-    
+  #getallbook {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
+
+      .book {
+      flex-basis: calc(25% - 10px);
+      margin: 5px;
+      height: 100%; /* Imposta l'altezza a 100% */
+      box-sizing: border-box; /* Assicura che il padding e il bordo non influenzino la dimensione totale */
+    }
+  
 }
