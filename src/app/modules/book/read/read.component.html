@@ -1,0 +1,21 @@
+<div class="book-details" *ngIf="book">
+  <h2>{{ book.name }}</h2>
+  <p><strong>CATEGORIA:</strong> {{ book.category }}</p>
+  <p><strong>PREZZO:</strong> {{ book.price }}</p>
+  <p><strong>CODICE PRODOTTO:</strong> {{ book.serialcode }}</p>
+  <p><strong>DESCRIZIONE:</strong> {{ book.description }}</p>
+  <p><strong>LIBRERIA:</strong> {{ book.library.name }}</p>
+  <div *ngIf="book.images && book.images.length > 0">
+    <h3>Images</h3>
+    <div *ngFor="let imageUrl of imageUrls">
+      <img [src]="imageUrl" alt="Book Image">
+    </div>
+  </div>
+  <p>
+    <!-- <strong>Quantity:</strong>  -->
+    <button (click)="decreaseQuantity()" [disabled]="book.quantity <= 1">-</button>
+    <span>{{ book.quantity }}</span>
+    <button (click)="increaseQuantity()">+</button>
+  </p>
+  <button (click)="addToCart()">Add to Cart</button>
+</div>
