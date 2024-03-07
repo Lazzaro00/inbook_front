@@ -67,14 +67,16 @@ export class LoginService {
    * @param {string} cognome il cognome dell'utente loggato da salvare nel localStorage
    * @param {string} usertype il tipo dell'utente loggato da salvare nel localStorage
    */
-  setUtenteSession(username: string, usertype: string): void {
-    const userSession = { username, usertype };
+  setUtenteSession(email: string, usertype: string, jwt:string): void {
+    const userSession = { email, usertype };
     localStorage.setItem(
       'userSession',
       JSON.stringify(userSession)
     );
     this.updateNominativoUtente.next(userSession);
     localStorage.setItem('loggato', 'true');
+    localStorage.setItem("jwt", "Bearer " + jwt);
+    console.log(localStorage.getItem("jwt"));
   }
 
   /**

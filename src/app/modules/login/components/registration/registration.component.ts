@@ -78,7 +78,6 @@ export class RegistrationComponent {
           this.buttonDisabled = true;
         }
       });
-  
   }
 
 }

@@ -76,6 +76,7 @@
         color="primary"
         class="button-action login c-button-large"
         [disabled]="loginForm.invalid"
+        (click)="onSubmit()"
       >
         {{ buttonConstant.accedi }}
       </button>

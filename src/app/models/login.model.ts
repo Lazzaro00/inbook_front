@@ -13,13 +13,15 @@ export interface LoginModelResponse {
   /** Il tipo di utente */
   usertype: string;
   /** Il nome dell'utente */
-  username: string;
+  email: string;
+
+  jwt: string;
 }
 
 /** Interfaccia per il nominativo utente */
 export interface SessioneUtenteModel {
   /** Lo username dell'utente */
-  username: string;
+  email: string;
   /** Il tipo di utente */
   usertype: string;
 }

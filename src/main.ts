@@ -16,6 +16,7 @@ import {
   AngularMaterialModule,
 } from './app/utils';
 import { environment } from './environments/environment';
+import { Interceptor } from './app/interceptor/interceptor';
 
 if (environment.production) {
   enableProdMode();
@@ -24,6 +25,7 @@ registerLocaleData(localeIt);
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'it-IT' },
     { provide: FormGroupDirective },
     { provide: TitleStrategy, useClass: TemplatePageTitleStrategy },
