@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,18 @@ import { BUTTON_CONSTANT } from 'src/app/constants';
   styleUrls: ['./card-book.component.scss']
 })
 export class CardBook {
+
+  @Input()
+  img:String = '';
+
+  @Input()
+  title: String = '';
+
+  @Input()
+  category: String = '';
+
+
+
   value: number = 0;
 
   increase() {
