@@ -6,9 +6,16 @@
         <ng-template matStepLabel>
           <p class="title">Accesso</p></ng-template>
         CREDENZIALI DI ACCESSO
+        <div class = "login-form">
         <mat-form-field id="email">
           <mat-label>Email</mat-label>
           <input matInput placeholder="Email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field id="usertype">
+          <mat-label>Usertype</mat-label>
+          <mat-select formControlName="usertype">
+            <mat-option *ngFor="let usertype of usertypes" [value]="usertype">{{ usertype }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field id="password">
           <mat-label>Password</mat-label>
@@ -23,13 +30,15 @@
           formControlName="confirm_password" 
           required>
         </mat-form-field>
-        <div>
+      </div>
+        <div class="buttons">
+          <button mat-button (click)="backToLogin()" id="back">Ritorna al Login</button>
           <button [disabled]=buttonDisabled mat-button matStepperNext>Avanti</button>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <mat-step [stepControl]="secondFormGroup" label="Anagrafica">
       <form [formGroup]="secondFormGroup" class="login-form">
         <mat-form-field id="firstdiv">
           <mat-label>Cognome</mat-label>
@@ -74,9 +83,9 @@
           <input matInput formControlName="idr" placeholder=""
                  required>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="buttons">
+          <button mat-button matStepperPrevious>Indietro</button>
+          <button mat-button matStepperNext (click)="">Conferma</button>
         </div>
       </form>
     </mat-step>

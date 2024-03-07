@@ -5,13 +5,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
-import { Route } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {NativeDateAdapter} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Dialog } from '@angular/cdk/dialog';
+import { SigninService } from 'src/app/services/signin.service';
+import { PanelService } from 'src/app/services';
 import { registrationModelRequest } from 'src/app/models/registration.model';
 
 interface Gender {
@@ -44,29 +44,44 @@ interface Gender {
 
 export class RegistrationComponent {
   buttonDisabled:boolean = true;
+  
+
   genere: Gender[] = [
     {value: 'Male', viewValue: 'Uomo'},
     {value: 'Female', viewValue: 'Donna'},
   ]
+  usertypes: String[] = ["ADMIN", "USER"];
+
   registrationUserForm = this._formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
-    confirm_password: ['', Validators.required]
+    confirm_password: ['', Validators.required],
+    usertype: ['', Validators.required]
   });
   secondFormGroup = this._formBuilder.group({
-    nome: ['', Validators.required],
-    cognome: ['', Validators.required],
-    datadinascita: ['', Validators.required],
-    genere: ['', Validators.required],
-    nazionalita: ['', Validators.required],
-    provincia: ['', Validators.required],
-    cdr: ['', Validators.required],
-    idr: ['', Validators.required],
+    name: ['', Validators.required],
+    surname: ['', Validators.required],
+    date: ['', Validators.required],
+    gender: ['', Validators.required],
+    nationality: ['', Validators.required],
+    province: ['', Validators.required],
+    city: ['', Validators.required],
+    address: ['', Validators.required],
   
   });
   isLinear = true;
+  registrationModel:registrationModelRequest;
+  constructor(
+    private _formBuilder: FormBuilder,
+    private dialog:Dialog,
+    private panelService:PanelService,
+    private router:Router,
+    private signinService:SigninService
+    ) {
+      this.registrationModel.id=0;
+      this.registrationModel = this.secondFormGroup.value;
+      
 
-  constructor(private _formBuilder: FormBuilder) {
 
   this.registrationUserForm.valueChanges.subscribe(() => {
         const password = this.registrationUserForm.get('password')?.value;
@@ -79,6 +94,26 @@ export class RegistrationComponent {
         }
       });
   
+  }
+
+  backToLogin(): void {
+    this.dialog.closeAll();
+    if (this.panelService.componentRef) {
+      this.panelService.close();
+    }
+    if (this.panelService.parentComponentRef) {
+      this.panelService.parentComponentRef.instance.closeDialog();
+    }
+    this.router.navigateByUrl("/login");
+  }
+
+  signup():void{
+    
+    var x = this.secondFormGroup.patchValue({
+      user : this.
+    });
+    x
+    this.signinService.signin()
   }
 
 }

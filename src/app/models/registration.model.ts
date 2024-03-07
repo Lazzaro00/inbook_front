@@ -13,7 +13,7 @@ export interface registrationModelRequest{
 
 }
 
-export interface registrationModelRespnse{
+export interface registrationModelResponse{
 
     id:number;
     user:Logged;

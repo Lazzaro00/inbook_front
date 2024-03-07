@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { SessioneUtenteModel } from "../models";
 import { PanelService } from ".";
 import { environment } from "src/environments/environment";
+import { registrationModelRequest, registrationModelResponse } from "../models/registration.model";
 
 /** Service per il login e l'autenticazione */
 @Injectable({
@@ -45,10 +46,10 @@ export class SigninService {
    * @param {LoginModelRequest} payload body inviato nella richiesta con email, password e remember me
    * @returns {Observable<LoginModelResponse>}
    */
-  signin(payload: any): Observable<any> {
+  signin(payload: registrationModelRequest): Observable<registrationModelResponse> {
     this.clearStorage();
     let url = `${this.baseUrl}auth/registration`;
-    return this.http.post(url, payload);
+    return this.http.post(url, payload) as Observable<registrationModelResponse>;
   }
 
   
