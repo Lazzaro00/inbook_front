@@ -5,8 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CardBook } from 'src/app/shared/card-book/card-book.component';
 import AppLayoutComponent from 'src/app/modules/app-layout/components/app-layout/app-layout.component';
-
-
+import { BookService } from 'src/app/services/book.service';
+import { CommonModule } from '@angular/common';
 
 /** Una classe per il componente del layout quando non si è loggati */
 @Component({
@@ -14,9 +14,28 @@ import AppLayoutComponent from 'src/app/modules/app-layout/components/app-layout
   selector: 'app-getAllBook',
   templateUrl: './get-all-book.component.html',
   styleUrls: ['./get-all-book.component.scss'],
-  imports: [RouterModule, AngularMaterialModule, MatCardModule,MatIconModule, CardBook, AppLayoutComponent],
+  imports: [RouterModule, AngularMaterialModule, MatCardModule,MatIconModule, CardBook, AppLayoutComponent, CommonModule],
 })
 export class GetAllBook {
+
+  listBooks:any[] = [];
+  years:any[] = [];
+  categories:any[] = [];
+  prices:any[] = [];
+
+  constructor(
+    private bookService : BookService
+
+  ){}
+
+  ngOnInit(){
+    this.bookService.getAllBooks(25,0).subscribe({
+      next: res => {
+        console.log(res.content);
+        this.listBooks = res.content;
+      }
+    });
+  }
 
 
 

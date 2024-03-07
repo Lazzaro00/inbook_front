@@ -9,7 +9,7 @@ import { bookModelResponse } from '../models/book.model';
 })
 export class BookService {
 
-  private baseUrl = `${environment.apiUrl}/book`;
+  private baseUrl = `${environment.apiUrl}book`;
 
   constructor(private http: HttpClient) { }
 

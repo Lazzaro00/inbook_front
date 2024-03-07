@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatDialog } from '@angular/material/dialog';
-
 import { AngularMaterialModule } from 'src/app/utils';
-import { BUTTON_CONSTANT } from 'src/app/constants';
+
+import { BookService } from 'src/app/services/book.service';
 
 /** Componente per il bottone di creazione nuovo utente */
 @Component({
@@ -15,6 +14,9 @@ import { BUTTON_CONSTANT } from 'src/app/constants';
   styleUrls: ['./card-book.component.scss']
 })
 export class CardBook {
+
+  @Input()
+  id:number = 0;
 
   @Input()
   img:String = '';
@@ -29,6 +31,8 @@ export class CardBook {
   price: number = 0.10;
 
   value: number = 0;
+
+  
 
   increase() {
     this.value++;
