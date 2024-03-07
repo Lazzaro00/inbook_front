@@ -12,13 +12,12 @@ export const routes: Routes = [
       },
       {
         path: 'utenti',
-        loadChildren: () =>
-          import('../utenti/utenti-routing').then((m) => m.routes),
+        loadChildren: () => import('../utenti/utenti-routing').then((m) => m.routes),
       },
-      {
-        path:'book',
-        loadChildren:()=> import ('../book/book-routing').then((m) => m.routes)
-      },
+      // {
+      //   path:'book',
+      //   loadChildren:()=> import ('../book/book-routing').then((m) => m.routes)
+      // },
 
       { path: '**', redirectTo: 'utenti', pathMatch: 'full' },
     ],
