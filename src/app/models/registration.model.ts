@@ -1,6 +1,8 @@
+import { loggedModelResponse, userModelRequest } from "./user.model";
+
 export interface registrationModelRequest{
     id:number;
-    user:User;
+    user:userModelRequest;
     images:number[];
     name:String;
     surname:String;
@@ -16,7 +18,7 @@ export interface registrationModelRequest{
 export interface registrationModelResponse{
 
     id:number;
-    user:Logged;
+    user:loggedModelResponse;
     images:number[];
     name:String;
     surname:String;
@@ -26,17 +28,4 @@ export interface registrationModelResponse{
     province:String;
     city:String;
     address:String;
-}
-
-
-export interface User{
-    id:number;
-    email:String;
-    password:String;
-    usertype:String;
-}
-
-export interface Logged{
-    email:String;
-    usertype:String;
 }
