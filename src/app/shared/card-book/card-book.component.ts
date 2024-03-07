@@ -25,7 +25,8 @@ export class CardBook {
   @Input()
   category: String = '';
 
-
+  @Input()
+  price: number = 0.10;
 
   value: number = 0;
 
