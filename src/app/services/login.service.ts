@@ -76,7 +76,7 @@ export class LoginService {
     this.updateNominativoUtente.next(userSession);
     localStorage.setItem('loggato', 'true');
     localStorage.setItem("jwt", "Bearer " + jwt);
-    console.log(localStorage.getItem("jwt"));
+    console.log("tua madre", localStorage.getItem("jwt"));
   }
 
   /**

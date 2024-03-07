@@ -36,6 +36,7 @@ bootstrapApplication(AppComponent, {
     },
 
     importProvidersFrom(
+      Interceptor,
       BrowserModule,
       HttpClientModule,
       BrowserAnimationsModule
