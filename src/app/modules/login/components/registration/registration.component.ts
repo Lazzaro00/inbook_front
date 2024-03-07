@@ -70,7 +70,6 @@ export class RegistrationComponent {
   
   });
   isLinear = true;
-  registrationModel:registrationModelRequest;
   constructor(
     private _formBuilder: FormBuilder,
     private dialog:Dialog,
@@ -78,8 +77,7 @@ export class RegistrationComponent {
     private router:Router,
     private signinService:SigninService
     ) {
-      this.registrationModel.id=0;
-      this.registrationModel = this.secondFormGroup.value;
+    
       
 
 
@@ -109,11 +107,6 @@ export class RegistrationComponent {
 
   signup():void{
     
-    var x = this.secondFormGroup.patchValue({
-      user : this.
-    });
-    x
-    this.signinService.signin()
   }
 
 }

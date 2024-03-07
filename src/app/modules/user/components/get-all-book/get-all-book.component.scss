@@ -1,0 +1,39 @@
+.login-image {
+    width: 100vw;
+    height: 36vh;
+    background-image: url("../../../../../assets/images/GetAllBook.png");
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .img-pointer {
+      cursor: pointer;
+      width: 25%;
+    }
+}
+
+
+#getall{
+  margin-left: 10%;
+  margin-right: 10%;
+  .campi-distance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    #campi{
+      padding:15px;
+      .campo{
+        padding-right: 5px;
+      }
+    }
+
+    #search{
+      padding:15px
+    }
+  }
+
+  #getallbook{
+    
+  }
+}

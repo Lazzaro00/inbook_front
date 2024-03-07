@@ -1,0 +1,26 @@
+<div>
+  <mat-card class="card">
+    <img mat-card-image src="../../../../../assets/images/book.png" alt="Descrizione dell'immagine">
+    <mat-card-header>
+      <mat-card-title>Titolo</mat-card-title>
+      <mat-card-subtitle>Categoria</mat-card-subtitle>
+    </mat-card-header>
+    <div class="price_quantity">
+      <mat-card-content>
+        9.99e
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button (click)="decrease()">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span>{{ value }}</span>
+        <button mat-icon-button (click)="increase()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card-actions>
+    </div>
+
+  <button mat-button id="buyButton">Acquista</button>
+
+</mat-card>
+</div>

@@ -1,0 +1,43 @@
+
+<div class="login-image">
+    <img
+      class="img-pointer"
+    />
+</div>
+
+<div id="getall">
+  <div class="campi-distance" id="ok">
+    <div id="campi">
+      <mat-form-field class="campo">
+        <mat-label>Categoria</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="campo">
+        <mat-label>Costo</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let pri of prices" [value]="pri">{{ pri }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Anno</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+    <div class="campo" id="search">
+      <mat-form-field >
+        <input matInput placeholder="Cerca">
+      </mat-form-field>  
+    </div>
+  </div>
+
+  <div id="getallbook">
+    <app-card-book></app-card-book>
+</div>

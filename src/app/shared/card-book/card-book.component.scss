@@ -1,0 +1,14 @@
+.card{
+    width: 20%;
+    height: 10%;
+    .price_quantity{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #buyButton{
+        background-color: rgb(255,148,0);
+        margin: 10px;
+        float: right;
+    }
+  }

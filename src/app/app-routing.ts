@@ -22,6 +22,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./modules/login/login-routing').then((m) => m.routes),
       },
+      {
+        path:'user',
+        loadChildren: () =>
+          import('./modules/user/user-routing').then((m) => m.routes),
+      }
     ],
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
