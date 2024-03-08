@@ -52,7 +52,6 @@ export class deleteuser {
     this.utentiService.delete(this.id).subscribe({
       
       next: () => {
-        this.listuser.deletefromlist(this.id);
         this.dialogg.open(confirmdeleteuser, {
           width: '660px',
           height: '300px',
@@ -62,7 +61,6 @@ export class deleteuser {
       },
 
       error: (e) => {console.log(e)}
-
     });
     
   }

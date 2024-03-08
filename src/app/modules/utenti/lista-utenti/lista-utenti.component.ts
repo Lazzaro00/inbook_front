@@ -75,10 +75,7 @@ export default class ListaUtentiComponent {
     this.getDataFromResolver();
   }
 
-  deletefromlist(id: number){
-    this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.id !== id);
-    this.cdr.detectChanges();
-  }
+
 
   /** Recupera i dati dal resolver */
   async getDataFromResolver() {
@@ -180,7 +177,22 @@ export default class ListaUtentiComponent {
       width: '660px',
       height: '300px',
       disableClose: true,
-      data: {id: id }
+      data: {
+        id: id,}
+    }).afterClosed().subscribe({
+      next: (x) => {
+        console.log("non ho filtrato", this.listaUtenti)
+        this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.id !== id);
+        this.dataSource = new MatTableDataSource<any>(
+          this.getMappedDataSource(this.listaUtenti)
+        );
+        console.log("ho filtrato", this.dataSource)
+        this.cdr.detectChanges();
+      }
     });
+  }
+
+  deletefromlist(id: number){
+   
   }
 }
