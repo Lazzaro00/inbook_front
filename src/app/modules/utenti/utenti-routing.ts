@@ -18,10 +18,10 @@ export const routes: Routes = [
         path: 'lista',
         title: 'Tutti gli utenti',
         loadComponent: () => import('./lista-utenti/lista-utenti.component'),
-        resolve: {                                                        // Il resolve è un oggetto la quale all'interno ha una variabile custom ( Scegliamo noi come nominarla )
-          listaUtenti: () => inject(UtentiService).resolveListaUtenti(), // La nostra variabile non sarà nient'altro che una callback ( Notiamo l'arrow function ),
+        //resolve: {                                                        // Il resolve è un oggetto la quale all'interno ha una variabile custom ( Scegliamo noi come nominarla )
+          //listaUtenti: () => inject(UtentiService).resolveListaUtenti(), // La nostra variabile non sarà nient'altro che una callback ( Notiamo l'arrow function ),
                                                                         //  quest'ultima inetterà al suo interno il service dove abbiamo creato la nostra funzione resolver
-        },
+        //},
       },
     ],
   },
