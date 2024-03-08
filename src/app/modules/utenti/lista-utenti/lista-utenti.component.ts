@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -13,10 +13,12 @@ import { GenericTableComponent } from 'src/app/shared/generic';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { WorkInProgressComponent } from 'src/app/shared';
+import { deleteuser } from 'src/app/shared/deleteuser/deleteuser.component'
 import { GenericTableService, LoaderSpinnerService } from 'src/app/services';
 import { UtentiService } from 'src/app/services/utenti.service';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 @Component({
   selector: 'app-lista-utenti',
   standalone: true,
@@ -61,7 +63,8 @@ export default class ListaUtentiComponent {
     private loaderSpinnerService: LoaderSpinnerService,
     private utentiService: UtentiService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr:ChangeDetectorRef
   ) {}
 
   /**
@@ -72,19 +75,25 @@ export default class ListaUtentiComponent {
     this.getDataFromResolver();
   }
 
-  /** Recupera i dati dal resolver */
-  getDataFromResolver() {
-    this.totalElements =
-      this.activatedRoute.snapshot.data['listaUtenti'].totalElements;
-    this.pageIndex = this.activatedRoute.snapshot.data['listaUtenti'].pageIndex;
-    this.listaUtenti = this.activatedRoute.snapshot.data['listaUtenti'].content;
-    if (this.listaUtenti) {
-      this.dataSource = new MatTableDataSource<any>(
-        this.getMappedDataSource(this.listaUtenti)
-      );
-    }
-  }
 
+
+  /** Recupera i dati dal resolver */
+  async getDataFromResolver() {
+    try {
+       const res = await this.utentiService.getListaUtenti(25, 0).toPromise();
+       this.totalElements = res.totalElements;
+       this.pageIndex = res.pageIndex;
+       this.listaUtenti = res.content;
+   
+       if (this.listaUtenti) {
+         this.dataSource = new MatTableDataSource<any>(
+           this.getMappedDataSource(this.listaUtenti)
+         );
+       }
+    } catch (e) {
+       console.log("errore: ", e);
+    }
+   }
   changePage(event: any) {
     // Quando facciamo partire una qualsiasi chiamata facciamo apparire il loaderSpinner per dare un feedback visivo all'utente
     this.loaderSpinnerService.show();
@@ -125,13 +134,13 @@ export default class ListaUtentiComponent {
           // Il tipo di bottone, se 'icon' oppure 'button'
           type: 'icon',
           // Una callback, sarà la funzione che partirà sul click dell'azione
-          callback: () => this.modificaUtente(r.id),
+          //callback: () => this.visualizzautente(r.id),
         },
         {
           title: LABEL_CONSTANT.elimina,
           icon: ICON_CONSTANT.delete,
           type: 'icon',
-          callback: () => this.eliminaUtente(r.email),
+          callback: () => this.eliminaUtente(r.user.id),
         },
       ];
       // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
@@ -150,23 +159,40 @@ export default class ListaUtentiComponent {
    * Funzione per la modifica dell'utente, apre la modale di modifica utente
    * @param {number} id L'id dell'utente da modificare
    */
-  modificaUtente(id: number) {
-    this.dialog.open(WorkInProgressComponent, {
+  /*visualizzautente(id: number) {
+    this.dialog.open( , {
       width: '660px',
       height: '300px',
       disableClose: true,
     });
-  }
+  }*/
 
   /**
    * Funzione per l'eliminazione dell'utente, apre la modale di conferma eliminazione
    * @param {number} id L'id dell'utente da eliminare
    */
   eliminaUtente(id: number) {
-    this.dialog.open(WorkInProgressComponent, {
+
+    this.dialog.open(deleteuser, {
       width: '660px',
       height: '300px',
       disableClose: true,
+      data: {
+        id: id,}
+    }).afterClosed().subscribe({
+      next: (x) => {
+        console.log("non ho filtrato", this.listaUtenti)
+        this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.id !== id);
+        this.dataSource = new MatTableDataSource<any>(
+          this.getMappedDataSource(this.listaUtenti)
+        );
+        console.log("ho filtrato", this.dataSource)
+        this.cdr.detectChanges();
+      }
     });
+  }
+
+  deletefromlist(id: number){
+   
   }
 }

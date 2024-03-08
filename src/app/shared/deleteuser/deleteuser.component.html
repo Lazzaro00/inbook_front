@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="head">
+    <div class="w-100">
+      <img src="../../../assets/images/sm-logo.svg" alt="Contrader logo" />
+      <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div class="body">
+    <h3 style="color: rgb(233, 58, 58); ">Sei sicuro di voler eliminare l'utente ? </h3>
+    <p>Procedendo eliminerai in maniera definitiva l'acoun dell'utente.</p>
+    <div class="buttons-container">
+      <button mat-raised-button class="left-button" (click)="closeDialog()">Torna indietro</button>
+      <button mat-raised-button class="right-button" (click)="deleteuser()">Conferma</button>
+    </div>
+  </div>
+</div>

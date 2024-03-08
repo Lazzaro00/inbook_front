@@ -22,7 +22,6 @@ import {
 import { HeaderComponent } from '../header/header.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { MatSidenavContent } from '@angular/material/sidenav';
-import { CreaUtenteComponent } from 'src/app/shared/button';
 
 /** Una classe per il componete del layout dell'APP dopo essersi loggati */
 @Component({
@@ -38,7 +37,6 @@ import { CreaUtenteComponent } from 'src/app/shared/button';
     HeaderComponent,
     SidenavComponent,
     SetTextByUrlPipe,
-    CreaUtenteComponent,
   ],
 })
 export default class AppLayoutComponent {
