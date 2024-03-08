@@ -38,6 +38,7 @@ export class GetAllBook {
   }
 
   openRead() {
+    // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
     this.router.navigate(['/book/read']);
     console.log("blkabla")
   }
