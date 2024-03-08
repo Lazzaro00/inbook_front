@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/utils';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,8 +24,8 @@ export class GetAllBook {
   prices:any[] = [];
 
   constructor(
-    private bookService : BookService
-
+    private bookService : BookService,
+    private router:Router
   ){}
 
   ngOnInit(){
@@ -35,6 +35,11 @@ export class GetAllBook {
         this.listBooks = res.content;
       }
     });
+  }
+
+  openRead() {
+    this.router.navigate(['/book/read']);
+    console.log("blkabla")
   }
 
 

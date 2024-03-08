@@ -49,6 +49,7 @@ export class deleteuser {
 
   deleteuser(){
     this.closeDialog();
+    
     this.utentiService.delete(this.id).subscribe({
       
       next: () => {

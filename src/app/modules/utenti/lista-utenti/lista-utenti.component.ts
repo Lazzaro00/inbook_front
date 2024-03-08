@@ -53,6 +53,7 @@ export default class ListaUtentiComponent {
   /** La lista degli utenti */
   listaUtenti: any[] = [];
   datePipe: any;
+  iduser:Number = 0;
 
   /**
    * Il costruttore della classe
@@ -140,7 +141,7 @@ export default class ListaUtentiComponent {
           title: LABEL_CONSTANT.elimina,
           icon: ICON_CONSTANT.delete,
           type: 'icon',
-          callback: () => this.eliminaUtente(r.user.id),
+          callback: () => this.eliminaUtente(r.user.email),
         },
       ];
       // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
@@ -171,18 +172,20 @@ export default class ListaUtentiComponent {
    * Funzione per l'eliminazione dell'utente, apre la modale di conferma eliminazione
    * @param {number} id L'id dell'utente da eliminare
    */
-  eliminaUtente(id: number) {
-
+  eliminaUtente(email: String) {
+    this.utentiService.getUserByMail(email).subscribe({
+      next: (res) => {
+        this.iduser = res.id;
+        console.log(this.iduser)
     this.dialog.open(deleteuser, {
       width: '660px',
       height: '300px',
       disableClose: true,
-      data: {
-        id: id,}
+      data: { id: this.iduser }
     }).afterClosed().subscribe({
       next: (x) => {
         console.log("non ho filtrato", this.listaUtenti)
-        this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.id !== id);
+        this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.email !== email);
         this.dataSource = new MatTableDataSource<any>(
           this.getMappedDataSource(this.listaUtenti)
         );
@@ -190,6 +193,9 @@ export default class ListaUtentiComponent {
         this.cdr.detectChanges();
       }
     });
+      }
+    })
+    
   }
 
   deletefromlist(id: number){

@@ -31,8 +31,9 @@ export class CardBook {
   price: number = 0.10;
 
   value: number = 0;
-
   
+  @Input()
+  onClick!:Function;
 
   increase() {
     this.value++;
@@ -42,4 +43,5 @@ export class CardBook {
     if (this.value > 0) {
       this.value--;
     }}
+
 }
