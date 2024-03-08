@@ -4,20 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { ImageService } from 'src/app/services/image.service';
 import { bookModelResponse } from '../../../models/book.model';
+import { CardBook } from 'src/app/shared/card-book/card-book.component';
+import { LibraryService } from 'src/app/services/library.service';
+
 
 @Component({
   standalone:true,
   selector: 'app-read-book',
   templateUrl: './read.component.html',
   styleUrls: ['./read.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, CardBook]
 })
 export class ReadComponent implements OnInit {
+  listBooks:any[] = [];
   @Input() bookId!: number;
   book!: bookModelResponse;
   imageUrls: string[] = []; // Declare imageUrls property here
 
-  constructor(private route: ActivatedRoute, private bookService: BookService, private imageService: ImageService) { }
+  constructor(private route: ActivatedRoute, private bookService: BookService, private imageService: ImageService, private libraryService: LibraryService) { }
 
   ngOnInit(): void {
     if (this.bookId) {
@@ -37,10 +41,18 @@ export class ReadComponent implements OnInit {
       (response: bookModelResponse) => {
         this.book = response;
         this.imageUrls = this.imageService.convertAllImagesToUrl(response.images);
+        this.libraryService.getRelatedBooks(bookId).subscribe(
+          (relatedBooks: any[]) => {
+            this.listBooks = relatedBooks;
+          },
+          (error) => {
+            console.error('Error loading related books:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error loading book details:', error);
-      }
+      },
     );
   }
 
