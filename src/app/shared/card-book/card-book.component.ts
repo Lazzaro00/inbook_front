@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from 'src/app/utils';
 
 import { BookService } from 'src/app/services/book.service';
+import { RouterModule } from '@angular/router';
 
 /** Componente per il bottone di creazione nuovo utente */
 @Component({
   selector: 'app-card-book',
   standalone: true,
-  imports: [CommonModule, AngularMaterialModule],
+  imports: [CommonModule, AngularMaterialModule, RouterModule],
   templateUrl: './card-book.component.html',
   styleUrls: ['./card-book.component.scss']
 })
@@ -31,8 +32,9 @@ export class CardBook {
   price: number = 0.10;
 
   value: number = 0;
-
   
+  @Input()
+  onClick!:Function;
 
   increase() {
     this.value++;
@@ -42,4 +44,5 @@ export class CardBook {
     if (this.value > 0) {
       this.value--;
     }}
+
 }

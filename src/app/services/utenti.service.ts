@@ -51,4 +51,16 @@ export class UtentiService {
     });
     return this.http.get<any>(url);
   }
+
+  delete(id: number):Observable<any>{
+    let url = `${this.baseUrl}user/delete?id=${id}`;
+    return this.http.delete<any>(url);
+  }
+
+
+  getUserByMail(email: String):Observable<any>{
+    let url = `${this.baseUrl}user/getByEmail?email=${email}`;
+    return this.http.get<any>(url);
+  }
+  
 }

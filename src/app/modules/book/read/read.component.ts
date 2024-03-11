@@ -1,20 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { ImageService } from 'src/app/services/image.service';
-import { bookModelResponse } from '../../../models/book.model'
+import { bookModelResponse } from '../../../models/book.model';
+import { CardBook } from 'src/app/shared/card-book/card-book.component';
+import { LibraryService } from 'src/app/services/library.service';
+
 
 @Component({
+  standalone:true,
   selector: 'app-read-book',
   templateUrl: './read.component.html',
-  styleUrls: ['./read.component.scss']
+  styleUrls: ['./read.component.scss'],
+  imports: [CommonModule, CardBook]
 })
 export class ReadComponent implements OnInit {
+  listBooks:any[] = [];
   @Input() bookId!: number;
   book!: bookModelResponse;
-  bookImageUrls: string[] = [];
+  imageUrls: string[] = []; // Declare imageUrls property here
 
-  constructor(private route: ActivatedRoute, private bookService: BookService, private imageService: ImageService) { }
+  constructor(private route: ActivatedRoute, private bookService: BookService, private imageService: ImageService, private libraryService: LibraryService) { }
 
   ngOnInit(): void {
     if (this.bookId) {
@@ -33,11 +40,19 @@ export class ReadComponent implements OnInit {
     this.bookService.getBookDetails(bookId).subscribe(
       (response: bookModelResponse) => {
         this.book = response;
-        this.bookImageUrls = this.imageService.convertAllImagesToUrl(response.images);
+        this.imageUrls = this.imageService.convertAllImagesToUrl(response.images);
+        this.libraryService.getRelatedBooks(bookId).subscribe(
+          (relatedBooks: any[]) => {
+            this.listBooks = relatedBooks;
+          },
+          (error) => {
+            console.error('Error loading related books:', error);
+          }
+        );
       },
       (error) => {
-        console.error('Errore nella lettura del libro:', error);
-      }
+        console.error('Error loading book details:', error);
+      },
     );
   }
 
@@ -52,10 +67,7 @@ export class ReadComponent implements OnInit {
   }
 
   addToCart(): void {
-    //TODO Placeholder per aggiungere il libro al carrello
+    //TODO Placeholder to add the book to the cart
     console.log('Book added to cart:', this.book);
   }
-
-
-
 }

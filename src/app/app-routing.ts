@@ -13,9 +13,7 @@ export const routes: Routes = [
       {
         path: 'gestionale',
         loadChildren: () =>
-          import('./modules/app-layout/app-layout-routing').then(
-            (m) => m.routes
-          ),
+          import('./modules/app-layout/app-layout-routing').then((m) => m.routes),
       },
       {
         path: 'login',
@@ -26,7 +24,12 @@ export const routes: Routes = [
         path:'user',
         loadChildren: () =>
           import('./modules/user/user-routing').then((m) => m.routes),
-      }
+      },
+      {
+        path:'book',
+        loadChildren:()=>
+        import('./modules/book/book-routing').then((m) => m.routes),
+      },
     ],
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

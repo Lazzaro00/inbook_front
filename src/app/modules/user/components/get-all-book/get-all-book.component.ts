@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/utils';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,8 +28,8 @@ export class GetAllBook {
 
   constructor(
     private bookService : BookService,
-    private dialog : MatDialog
-
+    private dialog : MatDialog,
+    private router:Router
   ){}
 
   ngOnInit(){

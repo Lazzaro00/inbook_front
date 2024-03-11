@@ -42,45 +42,45 @@
       <form [formGroup]="secondFormGroup" class="login-form">
         <mat-form-field id="firstdiv">
           <mat-label>Cognome</mat-label>
-          <input matInput formControlName="cognome" placeholder=""
+          <input matInput formControlName="surname" placeholder=""
                  required>
         </mat-form-field>
         <mat-form-field id="firstdiv">
           <mat-label>Nome</mat-label>
-          <input matInput formControlName="nome" placeholder=""
+          <input matInput formControlName="name" placeholder=""
                  required>
         </mat-form-field>
 
         <mat-form-field id="firstdiv">
           <mat-label>Data di Nascita</mat-label>
-          <input formControlName="datadinascita" matInput [matDatepicker]="picker">
+          <input formControlName="date" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field id="firstdiv">
             <mat-label>Genere</mat-label>
-            <mat-select formControlName="genere">
+            <mat-select formControlName="gender">
               <mat-option *ngFor="let gender of genere" [value]="gender.value">{{ gender.viewValue }}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="seconddiv">
           <mat-label>Nazionalità</mat-label>
-          <input matInput formControlName="nazionalita" placeholder=""
+          <input matInput formControlName="nationality" placeholder=""
                  required>
         </mat-form-field>
         <mat-form-field class="seconddiv">
           <mat-label>Provincia</mat-label>
-          <input matInput formControlName="provincia" placeholder=""
+          <input matInput formControlName="province" placeholder=""
                  required>
         </mat-form-field>
         <mat-form-field class="seconddiv">
           <mat-label>Città di residenza</mat-label>
-          <input matInput formControlName="cdr" placeholder=""
+          <input matInput formControlName="city" placeholder=""
                  required>
         </mat-form-field>
         <mat-form-field class="seconddiv">
           <mat-label>Indirizzo di residenza</mat-label>
-          <input matInput formControlName="idr" placeholder=""
+          <input matInput formControlName="address" placeholder=""
                  required>
         </mat-form-field>
         <div class="buttons">

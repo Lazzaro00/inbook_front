@@ -19,3 +19,15 @@
   </p>
   <button (click)="addToCart()">Add to Cart</button>
 </div>
+
+
+<div id="getallbook">
+  <app-card-book
+    class="book"
+    *ngFor="let book of listBooks" 
+    [id]="book.id"
+    [title]="book.name"
+    [category]="book.category"
+    [price]=book.price
+  ></app-card-book>
+</div>
