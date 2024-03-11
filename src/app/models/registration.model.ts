@@ -6,7 +6,7 @@ export interface registrationModelRequest{
     images?:number[];
     name:String;
     surname:String;
-    date:String;
+    birth_date:String;
     gender:String;
     nationality:String;
     province:String;

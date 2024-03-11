@@ -111,6 +111,7 @@ export class RegistrationComponent {
     let second = this.secondFormGroup.value;
     let first = this.registrationUserForm.value;
     let payload = {
+    image: null,
     name: String(second.name),
     surname: String(second.surname),
     user: {
@@ -118,7 +119,7 @@ export class RegistrationComponent {
       password: String(first.password),
       usertype: String(first.usertype)
     },
-    date: String(second.date),
+    birth_date: String(second.date),
     gender: String(second.gender),
     nationality: String(second.nationality),
     province: String(second.nationality),
@@ -126,6 +127,8 @@ export class RegistrationComponent {
     address: String(second.address),
   
     }
+
+    console.log(payload);
     this.signinService.signin(payload).subscribe({
       next: () => {console.log("APPOSTISSIMOOOOO")},
       error: (e) => {console.log(e)}
