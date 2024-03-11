@@ -13,6 +13,8 @@ import { Dialog } from '@angular/cdk/dialog';
 import { SigninService } from 'src/app/services/signin.service';
 import { PanelService } from 'src/app/services';
 import { registrationModelRequest } from 'src/app/models/registration.model';
+import { userModelResponse } from 'src/app/models/user.model';
+
 
 interface Gender {
   value: string;
@@ -105,7 +107,32 @@ export class RegistrationComponent {
   }
 
   signup():void{
-    
+    console.log("entrato nel signin")
+    let second = this.secondFormGroup.value;
+    let first = this.registrationUserForm.value;
+    let payload = {
+    image: null,
+    name: String(second.name),
+    surname: String(second.surname),
+    user: {
+      email: String(first.email),
+      password: String(first.password),
+      usertype: String(first.usertype)
+    },
+    birth_date: String(second.date),
+    gender: String(second.gender),
+    nationality: String(second.nationality),
+    province: String(second.nationality),
+    city: String(second.city),
+    address: String(second.address),
+  
+    }
+
+    console.log(payload);
+    this.signinService.signin(payload).subscribe({
+      next: () => {console.log("APPOSTISSIMOOOOO")},
+      error: (e) => {console.log(e)}
+    });
   }
 
 }

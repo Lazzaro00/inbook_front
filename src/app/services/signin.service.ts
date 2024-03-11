@@ -48,7 +48,7 @@ export class SigninService {
    */
   signin(payload: registrationModelRequest): Observable<registrationModelResponse> {
     this.clearStorage();
-    let url = `${this.baseUrl}auth/registration`;
+    let url = `${this.baseUrl}user/registrationAnag`;
     return this.http.post(url, payload) as Observable<registrationModelResponse>;
   }
 
