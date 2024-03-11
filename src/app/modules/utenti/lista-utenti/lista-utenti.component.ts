@@ -184,13 +184,10 @@ export default class ListaUtentiComponent {
       data: { id: this.iduser }
     }).afterClosed().subscribe({
       next: (x) => {
-        console.log("non ho filtrato", this.listaUtenti)
         this.listaUtenti = this.listaUtenti.filter(anagrafica => anagrafica.user.email !== email);
         this.dataSource = new MatTableDataSource<any>(
           this.getMappedDataSource(this.listaUtenti)
         );
-        console.log("ho filtrato", this.dataSource)
-        this.cdr.detectChanges();
       }
     });
       }
