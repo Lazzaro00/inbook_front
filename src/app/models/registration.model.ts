@@ -1,9 +1,9 @@
 import { loggedModelResponse, userModelRequest } from "./user.model";
 
 export interface registrationModelRequest{
-    id:number;
+    id?:number;
     user:userModelRequest;
-    images:number[];
+    images?:number[];
     name:String;
     surname:String;
     date:String;
