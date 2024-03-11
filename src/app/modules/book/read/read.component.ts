@@ -24,13 +24,15 @@ export class ReadComponent implements OnInit {
   constructor(private route: ActivatedRoute, private bookService: BookService, private imageService: ImageService, private libraryService: LibraryService) { }
 
   ngOnInit(): void {
+    
     if (this.bookId) {
       this.loadBookDetails(this.bookId);
     } else {
-      this.route.params.subscribe(params => {
-        const id = params['id'];
-        if (id) {
-          this.loadBookDetails(id);
+      this.route.queryParams.subscribe(params => {
+        this.bookId = params['id'];
+        console.log(this.bookId)
+        if (this.bookId ) {
+          this.loadBookDetails(this.bookId);
         }
       });
     }

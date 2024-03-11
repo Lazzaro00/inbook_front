@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from 'src/app/utils';
 
 import { BookService } from 'src/app/services/book.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule, NavigationExtras  } from '@angular/router';
+
 
 /** Componente per il bottone di creazione nuovo utente */
 @Component({
@@ -15,6 +16,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./card-book.component.scss']
 })
 export class CardBook {
+
+  constructor(private router:Router,){}
 
   @Input()
   id:number = 0;
@@ -44,5 +47,16 @@ export class CardBook {
     if (this.value > 0) {
       this.value--;
     }}
+
+  openRead() {
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: this.id
+      }
+    };
+    // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
+    this.router.navigate(['/book/read'], navigationExtras);
+  }
 
 }
