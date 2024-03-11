@@ -38,7 +38,7 @@ $custom-palette: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$frontend-primary: mat.define-palette(mat.$indigo-palette);
+$frontend-primary: mat.define-palette($custom-palette, 400);
 $frontend-accent: mat.define-palette(
   $custom-palette,
   500,

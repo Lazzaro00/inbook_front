@@ -1,19 +1,18 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, AbstractControl} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-import { Dialog } from '@angular/cdk/dialog';
 import { SigninService } from 'src/app/services/signin.service';
 import { PanelService } from 'src/app/services';
-import { registrationModelRequest } from 'src/app/models/registration.model';
-import { userModelResponse } from 'src/app/models/user.model';
+import { registrationOk } from 'src/app/shared/registrationOk/registrationOk.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 interface Gender {
@@ -46,6 +45,7 @@ interface Gender {
 
 export class RegistrationComponent {
   buttonDisabled:boolean = true;
+  mostra:boolean = true;
   
 
   genere: Gender[] = [
@@ -74,7 +74,7 @@ export class RegistrationComponent {
   isLinear = true;
   constructor(
     private _formBuilder: FormBuilder,
-    private dialog:Dialog,
+    private dialog:MatDialog,
     private panelService:PanelService,
     private router:Router,
     private signinService:SigninService
@@ -130,7 +130,18 @@ export class RegistrationComponent {
 
     console.log(payload);
     this.signinService.signin(payload).subscribe({
-      next: () => {console.log("APPOSTISSIMOOOOO")},
+      next: () => {
+        this.dialog.open(registrationOk, {
+          width: '660px',
+          height: '300px',
+          disableClose: true,
+        }).afterOpened().subscribe({
+          next: () => {
+            this.mostra = false;
+          }
+        });
+        },
+
       error: (e) => {console.log(e)}
     });
   }
