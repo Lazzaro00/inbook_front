@@ -51,15 +51,17 @@
       text-align: center;
     }
   }
+  
+  .right-button {
+    background-color: red;
+  }
+
   .buttons-container {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Posiziona i pulsanti ai due lati */
-  }
-  .left-button {
-    /* Stile del pulsante a sinistra */
-  }
-  .right-button {
-    background-color: red;
+    justify-content: flex-end; /* Modifica il posizionamento dei pulsanti */
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
   }
 }
