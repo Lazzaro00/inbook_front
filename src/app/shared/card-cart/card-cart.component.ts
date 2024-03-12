@@ -1,0 +1,47 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { AngularMaterialModule } from 'src/app/utils';
+
+import { Router, RouterModule, NavigationExtras  } from '@angular/router';
+import { bookModelResponse } from 'src/app/models/book.model';
+
+
+/** Componente per il bottone di creazione nuovo utente */
+@Component({
+  selector: 'app-card-cart',
+  standalone: true,
+  imports: [CommonModule, AngularMaterialModule, RouterModule],
+  templateUrl: './card-cart.component.html',
+  styleUrls: ['./card-cart.component.scss']
+})
+export class CardCart {
+
+  constructor(private router:Router){}
+
+  @Input()
+  book: bookModelResponse|null= null;
+
+  @Input()
+  quantitySelected: number = 0;
+  
+  @Input()
+  onClick!:Function;
+
+  openRead() {
+    if(this.book != null){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        
+          id: this.book.id
+      }
+    };
+    // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
+    this.router.navigate(['/book/read'], navigationExtras);
+  }
+  }
+  deleteFromCart(){
+    
+  }
+
+}

@@ -5,6 +5,8 @@ import { AngularMaterialModule } from 'src/app/utils';
 
 import { BookService } from 'src/app/services/book.service';
 import { Router, RouterModule, NavigationExtras  } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { CartBookModel } from 'src/app/models/cart.model';
 
 
 /** Componente per il bottone di creazione nuovo utente */
@@ -16,9 +18,6 @@ import { Router, RouterModule, NavigationExtras  } from '@angular/router';
   styleUrls: ['./card-book.component.scss']
 })
 export class CardBook {
-
-  constructor(private router:Router,){}
-
   @Input()
   id:number = 0;
 
@@ -34,22 +33,51 @@ export class CardBook {
   @Input()
   price: number = 0.10;
 
-  value: number = 0;
+  quantitySelected: number = 1;
+  button:boolean = false;
+
+  cartBookModel : CartBookModel={
+    book:null,
+    quantitySelected:0
+  };
   
   @Input()
   onClick!:Function;
 
+  constructor(
+    private router:Router, 
+    private bookService:BookService,
+    private cartService: CartService
+    ){}
+
   increase() {
-    this.value++;
+    this.quantitySelected++;
+    this.button = false;
   }
 
   decrease() {
-    if (this.value > 0) {
-      this.value--;
-    }}
+    if (this.quantitySelected > 0) {
+      this.quantitySelected--;
+    }
+    if(this.quantitySelected == 0){
+      this.button = true;
+    }
+  }
+
+  addToCart(){
+    if(this.quantitySelected == 0)
+      return;  
+    
+    this.bookService.getBookDetails(this.id).subscribe({
+      next:(res) => {
+        this.cartBookModel.book=res;
+        this.cartBookModel.quantitySelected=this.quantitySelected;
+        this.cartService.addBookInCart(this.cartBookModel);
+      },
+    });
+  }
 
   openRead() {
-
     let navigationExtras: NavigationExtras = {
       queryParams: {
         id: this.id

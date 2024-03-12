@@ -13,13 +13,13 @@
         <button mat-icon-button (click)="decrease()">
           <mat-icon>remove</mat-icon>
         </button>
-        <span>{{ value }}</span>
+        <span>{{ quantitySelected }}</span>
         <button mat-icon-button (click)="increase()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-card-actions>
     </div>
 
-  <button mat-button id="buyButton">Acquista</button>
+  <button mat-button id="buyButton" (click)="addToCart()" [disabled]=button>Acquista</button>
 
 </mat-card>

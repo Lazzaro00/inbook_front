@@ -3,4 +3,47 @@
   padding: 20px;
   height: 100vh;
   width: 25vw;
+
+      .book {
+      overflow: scroll;
+      flex-basis: calc(25% - 10px);
+      margin: 5px;
+      height: 100%;
+      max-height: 350px;
+      width: 100%;
+      box-sizing: border-box; /* Assicura che il padding e il bordo non influenzino la dimensione totale */
+    }
+
+    
+  }
+
+  .button{
+    margin: 10px;
+    width: 100%;
+  }
+
+  .concludi{
+    background-color: rgb(255,148,0);
+    color: white;
+    
+  }
+  .continua{
+    background-color: white;
+    color: black;
+    border: 2px solid #000;
+    padding: 10px 20px;
+  }
+
+  .total{
+  position: absolute;
+  bottom: 0;
+  width: 85%;
+  }
+
+  .distance{
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }

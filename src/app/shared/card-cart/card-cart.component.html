@@ -1,0 +1,19 @@
+
+  <mat-card>
+    <div  *ngIf="book != null"  class="card">
+    <div class="card">
+      <div>
+        <img (click)="openRead()" mat-card-image src="../../../../../assets/images/book.png" alt="Descrizione dell'immagine">
+      </div>
+      <div id="title_quantity">
+          <h4 class="text">{{book.name}}</h4>
+          <span class="small-text">quantity: {{quantitySelected}} </span>
+      </div>
+      
+  </div>
+  <div class="price_trash">
+    <span >{{book.price}}</span>
+    <mat-icon (click)="deleteFromCart()" class="small">delete</mat-icon>
+  </div>
+</div>
+</mat-card>
