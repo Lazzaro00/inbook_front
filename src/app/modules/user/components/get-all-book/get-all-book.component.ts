@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Cart } from 'src/app/shared/cart/cart.component';
 
+
 /** Una classe per il componente del layout quando non si è loggati */
 @Component({
   standalone: true,
@@ -41,14 +42,7 @@ export class GetAllBook {
     });
   }
 
-  openCart(): void {
-    this.dialogRef = this.dialog.open(Cart, {
-      position: {
-        top: '0',
-        right: '0',
-      },
-    });
-  }
+  
 
 
 

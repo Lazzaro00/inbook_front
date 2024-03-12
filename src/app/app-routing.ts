@@ -23,7 +23,7 @@ export const routes: Routes = [
       {
         path:'user',
         loadChildren: () =>
-          import('./modules/user/user-routing').then((m) => m.routes),
+          import('./modules/app-layout-user/app-layou-user-routing').then((m) => m.routes),
       },
       {
         path:'book',

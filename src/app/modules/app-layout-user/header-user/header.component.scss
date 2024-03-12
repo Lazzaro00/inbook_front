@@ -1,4 +1,4 @@
-@import "../../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/variables.scss";
 
 mat-toolbar {
   mat-toolbar-row {
@@ -81,4 +81,8 @@ mat-toolbar {
 figure {
   display: flex;
   align-items: center;
+}
+
+.cart_icon{
+  margin: 5px;
 }
