@@ -1,26 +1,52 @@
-<div class="book-details" *ngIf="book">
-  <h2>{{ book.name }}</h2>
-  <p><strong>CATEGORIA:</strong> {{ book.category }}</p>
-  <p><strong>PREZZO:</strong> {{ book.price }}</p>
-  <p><strong>CODICE PRODOTTO:</strong> {{ book.serialcode }}</p>
-  <p><strong>DESCRIZIONE:</strong> {{ book.description }}</p>
-  <p><strong>LIBRERIA:</strong> {{ book.library.name }}</p>
-  <div *ngIf="book.images && book.images.length > 0">
-    <h3>Images</h3>
-    <div *ngFor="let imageUrl of imageUrls">
-      <img [src]="imageUrl" alt="Book Image">
+<div class="containerbis">
+  <div class="container">
+  <div class="images">
+    <div class="image-container">
+      <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile style="border-radius: 20px;" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+          
+            <img [src]="tile.imgUrl" alt="Book Image">
+          
+        </mat-grid-tile>
+      </mat-grid-list>
     </div>
   </div>
-  <p>
-    <!-- <strong>Quantity:</strong>  -->
-    <button (click)="decreaseQuantity()" [disabled]="book.quantity <= 1">-</button>
-    <span>{{ book.quantity }}</span>
-    <button (click)="increaseQuantity()">+</button>
-  </p>
-  <button (click)="addToCart()">Add to Cart</button>
+
+  <div class="details">
+    <h2>{{ book.name }}</h2>
+    <p style="font-size: 30px; padding: 10px 0vw;">{{ book.price }} €<p>
+    
+    <div class="cat-cod">
+      <div class="s-cat">
+        <p style="color: #b0b0b0;"><strong>CATEGORIA:</strong></p> 
+        <p>{{ book.category }}</p>
+      </div>
+
+      <div class="s-cat">
+        <p style="color: #b0b0b0;"><strong>CODICE PRODOTTO:</strong></p>
+        <p>{{ book.serialcode }}</p>
+      </div>
+    </div>
+
+    <p style="color: #b0b0b0;"><strong>DESCRIZIONE:</strong> </p>
+    <p>{{ book.description }}</p>
+    <div class="container-quantita">
+      <div class="quantita"> 
+        <button [disabled]="book.quantity <= 1">
+          <img (click)="decreaseQuantity()" class="iconplus" src="../../../../assets/icons/meno.ico">
+        </button>
+        <div class="quantity">{{ book.quantity }}</div>
+        <button>
+          <img (click)="increaseQuantity()" class="iconplus" src="../../../../assets/icons/plus.ico">
+        </button>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="addToCart()">AGGIUNGI AL CARRELLO</button>
+    </div>
+  </div>
 </div>
 
-
+<h3><strong>Prodotti correlati</strong></h3>
 <div id="getallbook">
   <app-card-book
     class="book"
@@ -30,4 +56,5 @@
     [category]="book.category"
     [price]=book.price
   ></app-card-book>
+</div>
 </div>

@@ -133,7 +133,7 @@ export class RegistrationComponent {
       next: () => {
         this.dialog.open(registrationOk, {
           width: '660px',
-          height: '300px',
+          height: '420px',
           disableClose: true,
         }).afterOpened().subscribe({
           next: () => {
