@@ -1,3 +1,7 @@
+.background{
+  background-image: url("../../../../../assets/images/backgroud-registrazione.png");
+  height: 47.9vw;
+  width: 100vw;
 
 
 .mat-stepper-horizontal {
@@ -65,6 +69,7 @@
       align-items: center;
   }
   }
+}
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: rgb(255, 148, 0); 

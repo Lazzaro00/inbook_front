@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
+  constructor(private sanitizer: DomSanitizer) { }
+  base64Image: string= '';
   
-  constructor() { }
-
   convertAllImagesToUrl(images: number[][]): string[] {
     let imageUrls : string[] = [];
     if (images && images.length > 0) {
@@ -42,5 +43,13 @@ export class ImageService {
       };
       reader.readAsArrayBuffer(file);
     });
+  }
+
+  convertBinaryToBase64(binaryData: any) {
+    const reader = new FileReader();
+    reader.readAsDataURL(binaryData);
+    reader.onloadend = () => {
+      this.base64Image = reader.result as string;
+    };
   }
 }

@@ -2,7 +2,7 @@ import { libraryModelRequest, libraryModelResponse } from "./library.model";
 
 export interface bookModelRequest{
     id:number;
-    images:number[][];
+    images:number[];
     name:string;
     category:string;
     price:number;
@@ -14,7 +14,7 @@ export interface bookModelRequest{
 
 export interface bookModelResponse{
     id:number;
-    images:number[][];
+    images:number[];
     name:string;
     category:string;
     price:number;
