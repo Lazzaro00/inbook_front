@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { bookModelResponse } from '../models/book.model';
 import { CartBookModel } from '../models/cart.model';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,18 @@ export class CartService {
 
   bookInCart:Array<CartBookModel>=[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loginService:LoginService) { 
+    var email = this.loginService.getUtenteSessione().email;
+    this.getByEmail(email).subscribe({
+      next:(res) => {
+        console.log(res);
+        this.bookInCart = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
 
   getBookInCart(){
     return this.bookInCart;
@@ -24,6 +36,10 @@ export class CartService {
     this.bookInCart.push(book);
   }
 
+  empty(){
+    return this.bookInCart = [];
+  }
+
   read(id:number){
     const url = `${this.baseUrl}/read?id=${id}`;
     return this.http.get<any>(url);
@@ -31,11 +47,21 @@ export class CartService {
 
   insert(email:string, idBook:number, quantitySelected:number){
     const payload = {
-      email : email,
-      idBook:idBook,
-      quantitySelected:quantitySelected
+      userMail : email,
+      bookId:idBook,
+      quantity:quantitySelected
     };
-    return this.http.post<bookModelResponse>(`${this.baseUrl}/insert`, payload);
+    return this.http.post<CartBookModel>(`${this.baseUrl}/insertCart`, payload);
+  }
+
+  getByEmail(email:string){
+    const url = `${this.baseUrl}/getByUser?email=${email}`;
+    return this.http.get<any>(url);
+  }
+
+  moveFromCartToBuy(listCart:CartBookModel[]){
+    const url = `${this.baseUrl}/buy`;
+    return this.http.post<any>(url,listCart);
   }
 
   

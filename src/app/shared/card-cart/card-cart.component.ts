@@ -28,6 +28,9 @@ export class CardCart {
   @Input()
   onClick!:Function;
 
+  @Input()
+  cart:boolean = true;
+
   openRead() {
     if(this.book != null){
     let navigationExtras: NavigationExtras = {

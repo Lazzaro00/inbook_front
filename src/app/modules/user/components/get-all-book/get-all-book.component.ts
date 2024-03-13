@@ -22,9 +22,9 @@ import { Cart } from 'src/app/shared/cart/cart.component';
 export class GetAllBook {
 
   listBooks:any[] = [];
-  years:any[] = [];
+  bookNotFiltered:any[] = [];
   categories:any[] = [];
-  prices:any[] = [];
+  prices:any[] = [0,10,20,30,40,50,60,70,80,90,100];
   dialogRef: MatDialogRef<Cart> | undefined;
 
   constructor(
@@ -36,13 +36,19 @@ export class GetAllBook {
   ngOnInit(){
     this.bookService.getAllBooks(25,0).subscribe({
       next: res => {
-        console.log(res.content);
         this.listBooks = res.content;
+        this.bookNotFiltered = res.content;
       }
     });
   }
 
-  
+  onSelectionChange(event: any) {
+    this.listBooks = this.bookNotFiltered.filter(item => item.price >= event.value);
+  }
+
+  onSearchChange(value: any) {
+    this.listBooks = this.bookNotFiltered.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+  }
 
 
 

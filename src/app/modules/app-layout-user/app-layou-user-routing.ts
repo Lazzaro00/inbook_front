@@ -14,6 +14,10 @@ export const routes: Routes = [
         path: 'getallbook',
         loadChildren: () => import('./../user/user-routing').then((m) => m.routes),
       },
+      {
+        path: 'endOrder',
+        loadChildren: () => import('../../shared/end-order/end-order.component').then((m) => m.EndOrder)
+      },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

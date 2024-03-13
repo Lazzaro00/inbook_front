@@ -8,6 +8,7 @@ import { CardCart } from '../card-cart/card-cart.component';
 import { CartService } from 'src/app/services/cart.service';
 import { bookModelResponse } from 'src/app/models/book.model';
 import { CartBookModel } from 'src/app/models/cart.model';
+import { Router } from '@angular/router';
 
 
 /** Componente per il bottone di creazione nuovo utente */
@@ -26,7 +27,8 @@ export class Cart {
 
   constructor(
     private dialog: MatDialogRef<Cart>,
-    private cartService: CartService
+    private cartService: CartService,
+    private route:Router
     ) {}
 
   ngOnInit(){
@@ -46,6 +48,16 @@ export class Cart {
       this.subtotal += book.book?.price;
     }
     this.total = this.subtotal;
+  }
+
+  endOrder(){
+    this.cartService.moveFromCartToBuy(this.bookInCart).subscribe({
+      next:(res) => {
+        this.route.navigate(["/user/endOrder"]);
+        console.log("problem")
+        //this.bookInCart = this.cartService.empty();
+      }
+    });
   }
  
 }

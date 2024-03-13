@@ -10,7 +10,7 @@
         {{ price }}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button (click)="decrease()">
+        <button mat-icon-button (click)="decrease()" [disabled]=button>
           <mat-icon>remove</mat-icon>
         </button>
         <span>{{ quantitySelected }}</span>
@@ -20,6 +20,6 @@
       </mat-card-actions>
     </div>
 
-  <button mat-button id="buyButton" (click)="addToCart()" [disabled]=button>Acquista</button>
+  <button mat-button id="buyButton" (click)="addToCart()">Acquista</button>
 
 </mat-card>

@@ -13,7 +13,7 @@
   </div>
   <div class="price_trash">
     <span >{{book.price}}</span>
-    <mat-icon (click)="deleteFromCart()" class="small">delete</mat-icon>
+    <mat-icon (click)="deleteFromCart()" class="small" *ngIf="cart">delete</mat-icon>
   </div>
 </div>
 </mat-card>
