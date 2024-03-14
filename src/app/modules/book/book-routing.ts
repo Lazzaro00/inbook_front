@@ -18,6 +18,12 @@ export const routes: Routes = [
             loadComponent: () =>
             import("./read/read.component").then((m) => m.ReadComponent)
         },
+        {
+          path:"insert-product",
+          title: 'Insert',
+          loadComponent: () =>
+          import("./insert/insertproduct.component").then((m) => m.InsertProduct)
+      },
     ],
   },
 ];

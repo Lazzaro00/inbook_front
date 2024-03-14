@@ -23,8 +23,8 @@ export class BookService {
     return this.http.get<bookModelResponse>(url);
   }
 
-  insertBook(payload: bookModelResponse): Observable<bookModelResponse> {
-    return this.http.post<bookModelResponse>(`${this.baseUrl}/insert`, payload);
+  insertBook(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/insert`, payload);
   }
 
   updateBook(payload: bookModelResponse): Observable<bookModelResponse> {

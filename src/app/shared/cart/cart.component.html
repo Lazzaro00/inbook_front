@@ -1,0 +1,21 @@
+
+<div class="cart">
+  <div class="distance">
+    <h3>Carrello</h3>
+    <mat-icon class="close-icon" (click)="cartClose()">close</mat-icon>
+</div>
+  <div class="book">
+    <app-card-cart
+    *ngFor = "let b of bookInCart"
+    class="book"
+    [book] = "b.book"
+    [quantitySelected]="b.quantitySelected"
+    ></app-card-cart>
+  </div>
+  <div class="total">
+    <div class="distance"><span>Subtotale</span><span>{{subtotal}}</span></div>
+    <div class="distance"><span>Totale</span><span>{{total}}</span></div>
+    <button mat-button class="button concludi" (click)="endOrder()">CONCLUDI L'ORDINE</button>
+    <button mat-button class="button continua" (click)="cartClose()">CONTINUA LO SHOPPING</button>
+  </div>
+</div>

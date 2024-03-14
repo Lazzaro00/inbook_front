@@ -7,6 +7,9 @@ import { CardBook } from 'src/app/shared/card-book/card-book.component';
 import AppLayoutComponent from 'src/app/modules/app-layout/components/app-layout/app-layout.component';
 import { BookService } from 'src/app/services/book.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Cart } from 'src/app/shared/cart/cart.component';
+
 
 /** Una classe per il componente del layout quando non si è loggati */
 @Component({
@@ -19,22 +22,34 @@ import { CommonModule } from '@angular/common';
 export class GetAllBook {
 
   listBooks:any[] = [];
-  years:any[] = [];
+  bookNotFiltered:any[] = [];
   categories:any[] = [];
-  prices:any[] = [];
+  prices:any[] = [0,10,20,30,40,50,60,70,80,90,100];
+  dialogRef: MatDialogRef<Cart> | undefined;
 
   constructor(
     private bookService : BookService,
+    private dialog : MatDialog,
     private router:Router
   ){}
 
   ngOnInit(){
     this.bookService.getAllBooks(25,0).subscribe({
       next: res => {
-        console.log(res.content);
         this.listBooks = res.content;
+        this.bookNotFiltered = res.content;
       }
     });
   }
+
+  onSelectionChange(event: any) {
+    this.listBooks = this.bookNotFiltered.filter(item => item.price >= event.value);
+  }
+
+  onSearchChange(value: any) {
+    this.listBooks = this.bookNotFiltered.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+  }
+
+
 
 }

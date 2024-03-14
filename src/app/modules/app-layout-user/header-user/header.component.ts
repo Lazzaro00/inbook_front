@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { LoginService } from 'src/app/services';
 import {
@@ -12,6 +12,7 @@ import {
   import { AngularMaterialModule } from 'src/app/utils';
 import { SessioneUtenteModel } from 'src/app/models';
 import { WorkInProgressComponent } from 'src/app/shared';
+import { Cart } from 'src/app/shared/cart/cart.component';
 // import { SetTextByUrlPipe } from 'src/app/pipes';
 
 // import { GenericConfirmModalComponent } from 'src/app/shared/components/generic-confirm-modal/generic-confirm-modal.component';
@@ -19,7 +20,7 @@ import { WorkInProgressComponent } from 'src/app/shared';
 /** Una classe per il componente dell'header */
 @Component({
   standalone: true,
-  selector: 'app-header',
+  selector: 'app-header-user',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   imports: [
@@ -30,6 +31,7 @@ import { WorkInProgressComponent } from 'src/app/shared';
   ],
 })
 export class HeaderComponentUser {
+  theme: string = '';
   /** Costante delle label generiche */
   labelConstant: any = LABEL_CONSTANT;
   /** Subscription all'observable degli eventi di aggiornamento nominativo utente */
@@ -38,6 +40,7 @@ export class HeaderComponentUser {
   sessioneUtente!: SessioneUtenteModel;
   /** Indica se l'utente è ADMIN */
   isAdmin!: boolean;
+  dialogRef: MatDialogRef<Cart> | undefined;
 
   /**
    * Il costruttore della classe.
@@ -98,6 +101,15 @@ export class HeaderComponentUser {
     //     this.loginService.logout();
     //   }
     // });
+  }
+
+  openCart(): void {
+    this.dialogRef = this.dialog.open(Cart, {
+      position: {
+        top: '0',
+        right: '0',
+      },
+    });
   }
 
 }

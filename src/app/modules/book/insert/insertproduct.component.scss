@@ -14,6 +14,16 @@ button.addToCart {
 
 .container {
   display: flex;
+  gap: 50px;
+
+  .buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Modifica il posizionamento dei pulsanti */
+    position: sticky;
+    bottom: 24px;
+    right: 24px;
+  }
 }
 
 .containerbis{
@@ -23,6 +33,7 @@ button.addToCart {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .details {
@@ -53,7 +64,6 @@ button.addToCart {
   justify-content: flex-start; // Allinea i paragrafi ai margini opposti del contenitore
   .s-cat {
     padding-right: 10vw;
-    
   }
 }
 
@@ -81,8 +91,48 @@ button.addToCart {
 
 
 #getallbook{
-  display: flex;
-  gap: 10px;
-  height: 18vw;
+  scale: 0.8;
+  height: 20vw;
   width: 12vw;
 }
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-width {
+  width: 170%;
+}
+
+.image-upload-container {
+  cursor: pointer;
+}
+
+.btn-bwm {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  background-color: #ca9500;
+  border-color: #f9f9f9;
+  color: white;
+  padding: 10px 30px;
+  font-size: 20px;
+
+
+  &:hover, &:focus, &:active {
+    border-color: #ca9500 !important;
+    background-color: #ffbb01 !important;
+  }
+}
+
+.image{
+  input {
+    display: none;
+  }
+}
+

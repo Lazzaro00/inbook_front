@@ -21,8 +21,23 @@ export const SIDENAV_MENU_CONSTANT = [
     path: '/gestionale/profilo',
   },
   {
-    name: 'Libri',
-    path: '/book/get-all-book'
+    name: 'Prodotti',
+    icon: 'group',
+    childrenPath: [
+      '/book/get-all-book'
+    ],
+    children: [
+      {
+        wip: false, // Booleana per il controllo se la pagina è in work in progress
+        name: 'Tutti i prodotti',
+        path: '/book/get-all-book',
+      },
+      {
+        wip: false, // Booleana per il controllo se la pagina è in work in progress
+        name: 'Aggiungi prodotto',
+        path: '/book/insert-product',
+      }
+    ]
   }
 
 ]

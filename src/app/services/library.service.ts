@@ -40,4 +40,9 @@ export class LibraryService {
     const url = `${this.baseUrl}/getRelatedBook?id=${bookId}`;
     return this.http.get<any>(url);
   }
+
+  getLibraryByEmail(email:String): Observable<any>{
+    const url = `${this.baseUrl}/getByAdminEmail?email=${email}`;
+    return this.http.get<any>(url);
+  } 
 }
