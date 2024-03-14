@@ -1,0 +1,87 @@
+/* read.component.scss */
+.book-details {
+    max-width: 800px;
+    margin: auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  button.addToCart {
+    background-color: #28a745;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .containerbis{
+    margin: auto;
+    max-width: 1300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .details {
+    flex: 2;
+    padding-right: 20px;
+  }
+  
+  .images {
+    flex: 1.5;
+  }
+  
+  .images h3 {
+    margin-top: 0;
+  }
+  
+  .image-container {
+    flex-wrap: wrap;
+    padding-right: 1vw;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .cat-cod {
+    display: flex; // Rende i paragrafi figli disposti in linea
+    justify-content: flex-start; // Allinea i paragrafi ai margini opposti del contenitore
+    .s-cat {
+      padding-right: 10vw;
+      
+    }
+  }
+  
+  .iconplus{
+    max-width: 2vw;
+    padding-top: 10px;
+  }
+  
+  .quantity{
+    padding-top: 1vw;
+  }
+  
+  .quantita{
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .container-quantita{
+    padding-top: 5vw;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1vw;
+  }
+  
+  
+  
+  #getallbook{
+    scale: 0.8;
+    height: 20vw;
+    width: 12vw;
+  }
