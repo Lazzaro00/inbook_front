@@ -23,7 +23,7 @@ export class GetAllBook {
 
   listBooks:any[] = [];
   bookNotFiltered:any[] = [];
-  categories:any[] = [];
+  categories:string[] = [];
   prices:any[] = [0,10,20,30,40,50,60,70,80,90,100];
   dialogRef: MatDialogRef<Cart> | undefined;
 
@@ -40,10 +40,24 @@ export class GetAllBook {
         this.bookNotFiltered = res.content;
       }
     });
+
+    this.bookService.getAllCategory().subscribe({
+      next:(res) => {
+        this.categories = res;
+        this.categories.push("");
+      },
+    });
   }
 
-  onSelectionChange(event: any) {
+  onPriceChange(event: any) {
     this.listBooks = this.bookNotFiltered.filter(item => item.price >= event.value);
+  }
+
+  onCategoryChange(event: any) {
+    if(event.value == "")
+    this.listBooks = this.bookNotFiltered;
+  else
+    this.listBooks = this.bookNotFiltered.filter(item => item.category == event.value);
   }
 
   onSearchChange(value: any) {

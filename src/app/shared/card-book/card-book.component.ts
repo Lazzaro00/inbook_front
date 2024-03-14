@@ -38,6 +38,7 @@ export class CardBook {
   button:boolean = true;
 
   cartBookModel : CartBookModel={
+    id:0,
     user:null,
     book:null,
     quantitySelected:0
