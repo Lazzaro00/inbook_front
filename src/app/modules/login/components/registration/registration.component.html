@@ -15,9 +15,9 @@
         </mat-form-field>
         <mat-form-field id="usertype">
           <mat-label>Usertype</mat-label>
-          <mat-select formControlName="usertype">
+          <mat-select formControlName="usertype" (selectionChange)="whatisusert($event.value)">
             <mat-option *ngFor="let usertype of usertypes" [value]="usertype">{{ usertype }}</mat-option>
-          </mat-select>
+          </mat-select>          
         </mat-form-field>
         <mat-form-field id="password">
           <mat-label>Password</mat-label>
@@ -85,10 +85,87 @@
         </mat-form-field>
         <div class="buttons">
           <button mat-button matStepperPrevious>Indietro</button>
-          <button mat-button (click)="signup()">Conferma</button>
+          <button mat-button *ngIf="isUser" (click)="signup()">Conferma</button>
+          <button mat-button matStepperNext (click)="signup()" *ngIf="!isUser">Avanti</button>
         </div>
       </form>
     </mat-step>
+
+  <mat-step *ngIf="!isUser" [stepControl]="fourthFormGroup" label="Selezione" >
+    <form [formGroup]="fourthFormGroup" class="login-form">
+
+          <label for="">Scegli:</label>
+
+          <mat-button-toggle-group style="display: flex;" name="fontStyle" aria-label="Font Style" (change)="onToggleChange($event)">
+            <mat-button-toggle mat-button matStepperNext value="existingLibrary">Biblioteca esistente</mat-button-toggle>
+            <mat-button-toggle value="notExistingLibrary">Inserisci nuova Biblioteca</mat-button-toggle>
+          </mat-button-toggle-group>
+
+        <div *ngIf="newLibrary">
+          <mat-form-field id="firstdiv">
+            <mat-label>Seleziona libreria</mat-label>
+            <mat-select formControlName="library">
+              <mat-option *ngFor="let lib of libraryLit" [value]="lib">{{ lib.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="seconddiv">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" placeholder="inserisci password per l'autenticazione" >
+          </mat-form-field>
+
+          <button mat-button (click)="insertExistLibrary()">Conferma</button>
+          
+        </div>
+
+        <div *ngIf="!newLibrary">
+          <button mat-button matStepperNext>Avanti</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <div *ngIf="newLib">
+    <mat-step *ngIf="!isUser" [stepControl]="thirdFormGroup" label="Biblioteca" >
+      <form [formGroup]="thirdFormGroup" class="login-form">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" placeholder="" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Descrizione</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="example-width">Provincia</mat-label>
+          <input matInput formControlName="province" placeholder="" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="example-width">Città</mat-label>
+          <input matInput formControlName="city" placeholder="" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="example-width">Indirizzo</mat-label>
+          <input matInput formControlName="address" placeholder="" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="example-width">Password</mat-label>
+          <input matInput formControlName="password" placeholder="" required>
+        </mat-form-field>
+
+        <div class="buttons">
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button (click)="bibliotec()">Conferma</button>
+        </div>
+      </form>
+    </mat-step>
+  </div>
   </mat-stepper>
 </div>
 </div>

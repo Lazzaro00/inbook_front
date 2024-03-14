@@ -25,11 +25,7 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./modules/app-layout-user/app-layou-user-routing').then((m) => m.routes),
       },
-      {
-        path:'book',
-        loadChildren:()=>
-        import('./modules/book/book-routing').then((m) => m.routes),
-      },
+
     ],
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

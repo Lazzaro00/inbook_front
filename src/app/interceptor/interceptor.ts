@@ -18,7 +18,7 @@ export class Interceptor implements HttpInterceptor {
 
     // Modifica della richiesta aggiungendo un'intestazione
     const modifiedRequest = request.clone({
-      setHeaders: { 'Authorization': localStorage.getItem("jwt")??'' },
+      setHeaders: { 'Authorization': localStorage.getItem("jwt")??'' , 'Access-Control-Allow-Origin': '*'},
     });
 
     // Passa la richiesta modificata al gestore successivo

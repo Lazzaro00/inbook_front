@@ -83,21 +83,7 @@ export class HeaderComponent {
    * Alla chiusura della modale se si è confermato il logout, viene effettuato.
    */
   logout(): void {
-    this.dialog.open(WorkInProgressComponent, {
-      width: '660px',
-      height: '300px',
-      disableClose: true,
-    });
-    // const dialogRef = this.dialog.open(
-    //   GenericConfirmModalComponent,
-    //   GENERIC_CONFIRM.effettua_logout
-    // );
-
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.loginService.logout();
-    //   }
-    // });
+   this.loginService.logout();
   }
 
 }
