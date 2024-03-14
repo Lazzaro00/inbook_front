@@ -35,4 +35,9 @@ export class BookService {
     const url = `${this.baseUrl}/delete?id=${bookId}`;
     return this.http.delete(url);
   }
+
+  getAllCategory():Observable<string[]>{
+    const url = `${this.baseUrl}/getAllCategory`;
+    return this.http.get<string[]>(url);
+  }
 }
