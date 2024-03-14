@@ -8,6 +8,7 @@
     <app-card-cart
     *ngFor = "let b of bookInCart"
     class="book"
+    [idCart]="b.id"
     [book] = "b.book"
     [quantitySelected]="b.quantitySelected"
     ></app-card-cart>

@@ -5,6 +5,8 @@ import { AngularMaterialModule } from 'src/app/utils';
 
 import { Router, RouterModule, NavigationExtras  } from '@angular/router';
 import { bookModelResponse } from 'src/app/models/book.model';
+import { CartService } from 'src/app/services/cart.service';
+import { Cart } from '../cart/cart.component';
 
 
 /** Componente per il bottone di creazione nuovo utente */
@@ -17,7 +19,10 @@ import { bookModelResponse } from 'src/app/models/book.model';
 })
 export class CardCart {
 
-  constructor(private router:Router){}
+  constructor(private router:Router, private cartService:CartService, private cartC:Cart){}
+
+  @Input()
+  idCart:number = 0;
 
   @Input()
   book: bookModelResponse|null= null;
@@ -43,8 +48,14 @@ export class CardCart {
     this.router.navigate(['/book/read'], navigationExtras);
   }
   }
+
+
   deleteFromCart(){
-    
+    this.cartService.delete(this.idCart).subscribe({
+      next:(res:any) =>{
+        this.cartC.totalprice();
+      },
+    });
   }
 
 }

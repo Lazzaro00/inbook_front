@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { bookModelResponse } from '../models/book.model';
 import { CartBookModel } from '../models/cart.model';
@@ -14,12 +14,12 @@ export class CartService {
   private baseUrl = `${environment.apiUrl}cart`;
 
   bookInCart:Array<CartBookModel>=[];
+  riepilogo:Array<CartBookModel>=[];
 
   constructor(private http: HttpClient, private loginService:LoginService) { 
     var email = this.loginService.getUtenteSessione().email;
     this.getByEmail(email).subscribe({
       next:(res) => {
-        console.log(res);
         this.bookInCart = res;
       },
       error: (err) => {
@@ -32,7 +32,12 @@ export class CartService {
     return this.bookInCart;
   }
 
+  getRiepilogo(){
+    return this.riepilogo;
+  }
+
   addBookInCart(book:any){
+    console.log("addInCart ", book, this.bookInCart)
     this.bookInCart.push(book);
   }
 
@@ -43,6 +48,18 @@ export class CartService {
   read(id:number){
     const url = `${this.baseUrl}/read?id=${id}`;
     return this.http.get<any>(url);
+  }
+
+  delete(id:number){
+    const index = this.bookInCart.findIndex(item => item.id === id); // Trova l'indice dell'elemento con l'id specificato
+    if (index !== -1) {
+      this.bookInCart.splice(index, 1); 
+    }
+    const url = `${this.baseUrl}/delete?id=${id}`;
+    console.log(url);
+    return this.http.delete<any>(url);
+    
+    
   }
 
   insert(email:string, idBook:number, quantitySelected:number){
@@ -59,9 +76,11 @@ export class CartService {
     return this.http.get<any>(url);
   }
 
-  moveFromCartToBuy(listCart:CartBookModel[]){
+  moveFromCartToBuy(){
     const url = `${this.baseUrl}/buy`;
-    return this.http.post<any>(url,listCart);
+    this.riepilogo = this.bookInCart;
+    this.empty();
+    return this.http.post<any>(url,this.bookInCart);
   }
 
   

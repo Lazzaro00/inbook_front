@@ -16,7 +16,7 @@ export const routes: Routes = [
       },
       {
         path: 'endOrder',
-        loadChildren: () => import('../../shared/end-order/end-order.component').then((m) => m.EndOrder)
+        loadComponent: () => import('../../shared/end-order/end-order.component').then((m) => m.EndOrder)
       },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
