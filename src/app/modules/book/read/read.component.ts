@@ -66,7 +66,7 @@ export class ReadComponent implements OnInit {
       (response: bookModelResponse) => {
         console.log("response ", response);
         this.book = response;
-        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.imageService.convertImageToUrl(response.images)) as SafeUrl; // Sanitized URL
+        this.imageUrl = this.imageService.convertImageToUrl(response.images) //as SafeUrl; 
         console.log(this.book, this.imageUrl);
         this.tiles[1].imgUrl = this.imageUrl;
 

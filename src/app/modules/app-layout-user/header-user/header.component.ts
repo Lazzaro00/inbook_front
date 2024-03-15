@@ -64,11 +64,11 @@ export class HeaderComponentUser {
   ngOnInit(): void {
     // this.isAdmin = this.loginService.isAdmin();
      this.sessioneUtente = this.loginService.getUtenteSessione();
-    // this.nominativoUtenteListener = this.loginService
-    //   .updateNominativoUtenteListener()
-    //   .subscribe((res: SessioneUtenteModel) => {
-    //     console.log("utente:" + res.username);
-    //     this.sessioneUtente = res;});
+    this.nominativoUtenteListener = this.loginService
+      .updateNominativoUtenteListener()
+      .subscribe((res: SessioneUtenteModel) => {
+        console.log("utente:" + res.email);
+        this.sessioneUtente = res;});
   }
 
   /**
@@ -81,16 +81,8 @@ export class HeaderComponentUser {
     }
   }
 
-  /**
-   * Mostra la modale di conferma logout.
-   * Alla chiusura della modale se si è confermato il logout, viene effettuato.
-   */
   logout(): void {
-    this.dialog.open(WorkInProgressComponent, {
-      width: '660px',
-      height: '300px',
-      disableClose: true,
-    });
+    this.loginService.logout();
     // const dialogRef = this.dialog.open(
     //   GenericConfirmModalComponent,
     //   GENERIC_CONFIRM.effettua_logout
@@ -101,6 +93,10 @@ export class HeaderComponentUser {
     //     this.loginService.logout();
     //   }
     // });
+  }
+
+  profile(): void{
+    this.router.navigate(["/login/profile"]);
   }
 
   openCart(): void {

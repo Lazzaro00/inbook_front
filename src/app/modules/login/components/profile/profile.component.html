@@ -1,74 +1,28 @@
-<div class="container">
-    <ng-container
-    >     
-    <div class="table-container"> 
-       <table>
-        <tr>
-           <th colspan="5" class="large-text">CREDENZIALI</th>
-           <td colspan="6">
-            <button *ngFor="let action of actionCredenziali" (click)="action.callback()" mat-icon-button>
-              <mat-icon>{{ action.icon }}</mat-icon>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>Email:</td>
-          <th>{{ uData?.email }}</th>
-       </tr>
-       <tr><br></tr>
-       <!-- <tr>
-          <td>Password:</td>
-          <th>{{ uData?.password }}</th>
-       </tr> -->
-       <tr><br></tr>
-       <tr>
-          <td>Ruolo:</td>
-          <th>{{ uData?.usertype |titlecase}}</th>
-       </tr>
-        
-      </table>
-      
-      <table><tr><br>     </tr><br></table>
-      <table>
-        <tr>
-          <th colspan="5" class="large-text">ANAGRAFICA</th>
-          <td colspan="6">
-           <button *ngFor="let action of actionAnagrafica" (click)="action.callback()" mat-icon-button>
-             <mat-icon>{{ action.icon }}</mat-icon>
-           </button>
-         </td>
-       </tr>
-        <tr>
-           <td>Nome:</td>
-           <th>{{ aData?.name |titlecase}}</th>
-        </tr>
-        <tr><br></tr>
-        <tr>
-           <td>Cognome:</td>
-           <th>{{ aData?.surname |titlecase}}</th>
-        </tr>
-        <tr><br></tr>
-        <tr>
-           <td>Indirizzo:</td>
-           <th>{{ aData?.address |titlecase}}</th>
-        </tr>
-        <tr><br></tr>
-        <tr>
-           <td>Luogo Nascita:</td>
-           <th>{{ aData?.luogoNascita |titlecase}}</th>
-        </tr>
-        <tr><br></tr>
-        <tr>
-           <td>Data Nascita:</td>
-           <th>{{ aData?.dataNascita}}</th>
-        </tr>
-       </table>
-       </div>
-    </ng-container>
-    <ng-template #noResult>
-      <div class="body mt-24">
-        <span>{{ resultConstant.nessun_risultato | uppercase }}</span>
+<div class="containerbis">
+  <div class="container">
+    <div class="image-container">
+      <img [src]="imageUrl" alt="Profile Image">
+    </div>
+
+    <div class="details">
+      <h3>{{ aData?.name }} {{ aData?.surname }}</h3>
+      <h4>{{ aData?.user?.email }}</h4>
+      <br>
+      <p><b>GENERE</b></p>
+      <p>{{ aData?.gender }}</p>
+
+      <p><b>DATA DI NASCITA</b></p>
+      <p>{{ aData?.birth_date }}</p>
+
+      <p><b>DATI DI RESIDENZA</b></p>
+      <p>{{ aData?.address }} - {{ aData?.city }} ({{ aData?.province }})</p>
+    </div>
+    <br><br><br>
+    <div class="button-container">
+        <button id="editButton" (click)="anagEdit(aData?.id)" mat-button>
+          <b>MODIFICA</b>
+        </button>
+    
       </div>
-    </ng-template>
   </div>
-  
+</div>

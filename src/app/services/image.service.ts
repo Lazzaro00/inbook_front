@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
   constructor(private sanitizer: DomSanitizer) { }
-  base64Image: string= '';
-  
-  convertAllImagesToUrl(images: number[][]): string[] {
-    let imageUrls : string[] = [];
+
+  async convertAllImagesToUrl(images: number[][]): Promise<SafeUrl[]> {
+    let imageUrls: SafeUrl[] = [];
     if (images && images.length > 0) {
-      images.forEach(image => {
-        imageUrls.push(this.convertImageToUrl(image));
-      });
+      for (const image of images) {
+        const url = await this.convertImageToUrl(image);
+        if (url) {
+          imageUrls.push(this.sanitizer.bypassSecurityTrustUrl(url));
+        }
+      }
     }
     return imageUrls;
   }
 
-  convertImageToUrl(image: number[]): string {
-    if (image && image.length > 0) {
-      const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
-      return URL.createObjectURL(blob);
+  async convertImageToUrl(image: number[]): Promise<string | undefined> {
+    try {
+      return 'data:image/jpeg;base64,' + image;
+    } catch (error) {
+      console.error('Error converting image to URL:', error);
+      return undefined;
     }
-    return '';
   }
+  
+
+  
 
   convertImageToByteArray(file: File): Promise<Uint8Array> {
     return new Promise((resolve, reject) => {
@@ -43,13 +49,5 @@ export class ImageService {
       };
       reader.readAsArrayBuffer(file);
     });
-  }
-
-  convertBinaryToBase64(binaryData: any) {
-    const reader = new FileReader();
-    reader.readAsDataURL(binaryData);
-    reader.onloadend = () => {
-      this.base64Image = reader.result as string;
-    };
   }
 }

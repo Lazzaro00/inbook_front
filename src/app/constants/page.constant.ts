@@ -18,7 +18,7 @@ export const SIDENAV_MENU_CONSTANT = [
     wip: true,
     name: 'Il tuo profilo',
     icon: 'person',
-    path: '/gestionale/profilo',
+    path: '/login/profile',
   },
   {
     name: 'Prodotti',
