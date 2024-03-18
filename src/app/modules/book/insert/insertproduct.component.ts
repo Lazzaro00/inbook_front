@@ -31,7 +31,7 @@ export class InsertProduct implements OnInit {
     ) { 
       this.inserimentoLibro = this.fb.group({
         id: [""],
-        images:[Blob, Validators.required],
+        images:['', Validators.required],
         name:["", Validators.required],
         category:["", Validators.required],
         price:["", Validators.required],

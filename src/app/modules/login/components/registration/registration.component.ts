@@ -177,11 +177,11 @@ export class RegistrationComponent {
   bibliotec(){
     let user = this.registrationUserForm.value;
     let payload = { ...this.thirdFormGroup.value, 
-    user:{
+    admins:[{
       mail:user.email, 
       password: null,
       usertype: null
-    }};
+    }]};
 
     console.log(payload)
     this.signinService.registerBiblioteca(payload).subscribe({
