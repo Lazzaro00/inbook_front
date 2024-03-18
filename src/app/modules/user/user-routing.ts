@@ -13,6 +13,10 @@ export const routes: Routes = [
         loadComponent: () =>
           import("./components/get-all-book/get-all-book.component").then((m) => m.GetAllBook)
       },
+      {
+        path:"historical",
+        loadComponent:() => import("./components/historical/historical.component").then((m) => m.Historical)
+      }
     ],
   },
 ];

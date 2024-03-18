@@ -27,7 +27,7 @@ export class EndOrder {
 
     ngOnInit(){
       this.bookInCart = this.cartService.getRiepilogo();
-      console.log(this.bookInCart)
+      console.log("Reipilogo", this.bookInCart)
     }
 
     cartClose(){
