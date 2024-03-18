@@ -45,4 +45,14 @@ export class LibraryService {
     const url = `${this.baseUrl}/getByAdminEmail?email=${email}`;
     return this.http.get<any>(url);
   } 
+
+  getall(){
+    const url = `${this.baseUrl}/getAllList`;
+    return this.http.get<any>(url);
+  }
+
+  insertExistLibrary(payload: any){
+    const url = `${this.baseUrl}/`;
+    return this.http.post<any>(url, payload);
+  }
 }

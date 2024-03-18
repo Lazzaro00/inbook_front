@@ -90,7 +90,7 @@ export class CardBook {
       }
     };
     // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
-    this.router.navigate(['/book/read'], navigationExtras);
+    this.router.navigate(['/user/book/read'], navigationExtras);
   }
 
 }

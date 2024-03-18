@@ -52,6 +52,11 @@ export class SigninService {
     return this.http.post(url, payload) as Observable<registrationModelResponse>;
   }
 
+  registerBiblioteca(payload: any):Observable<any>{
+    let url = `${this.baseUrl}library/registration`;
+    return this.http.post(url, payload);
+  }
+
   
 
   /**
