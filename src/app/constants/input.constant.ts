@@ -26,7 +26,10 @@ export const INPUT_CONSTANT = {
   campi_obbligatori: '* Campi obbligatori',
   quantita: 'Quantità',
   name: 'Nome',
-  surname: 'Conome'
+  surname: 'Cognome',
+  idOrder:'ID ORDINE',
+  dateOrder: 'DATA ORDINE',
+  priceOrder:'COSTO'
 };
 
 /** Costante con i testi da usare negli input di una tabella*/
@@ -36,7 +39,11 @@ export const TABLE_INPUT_CONSTANT = {
   surname: 'Conome',
   usertype: 'Ruolo',
   id: 'ID',
+  idOrder:"ID ORDINE", 
+  dateOrder:"DATA ORDINE", 
+  priceOrder:"COSTO"
 };
+
 
 /** Costante con i testi da usare nella select della azioni di gruppo */
 export const TABLE_GROUP_ACTIONS_CONSTANT = [
@@ -46,6 +53,14 @@ export const TABLE_GROUP_ACTIONS_CONSTANT = [
   },
 ];
 
+export const TABLE_GROUP_ACTIONS_CONSTANT_VISUAL = [
+  {
+    icon: 'visibility',
+    value: 'Visualizza',
+  },
+];
+
 export const TABLE_COLUMNS = {
   utenti: ['select', 'name', 'surname', 'email', 'action'],
+  historical:['idOrder', 'dateOrder', 'priceOrder','action']
 };

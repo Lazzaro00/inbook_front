@@ -37,7 +37,10 @@ export class CartService {
   }
 
   addBookInCart(book:any){
-    console.log("addInCart ", book, this.bookInCart)
+    const foundItem = this.bookInCart.find(item => item.id === book.id);
+    if(foundItem)
+      foundItem.quantitySelected += book.quantitySelected;
+    else
     this.bookInCart.push(book);
   }
 
