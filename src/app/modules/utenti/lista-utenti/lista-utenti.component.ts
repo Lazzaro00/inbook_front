@@ -128,16 +128,6 @@ export default class ListaUtentiComponent {
       // Creiamo un'array di azioni che l'utente puo effettuare sulla tabella
       const action = [
         {
-          // Ogni azione ha bisogno di un titolo
-          title: LABEL_CONSTANT.modifica,
-          // Icona
-          icon: ICON_CONSTANT.edit,
-          // Il tipo di bottone, se 'icon' oppure 'button'
-          type: 'icon',
-          // Una callback, sarà la funzione che partirà sul click dell'azione
-          //callback: () => this.visualizzautente(r.id),
-        },
-        {
           title: LABEL_CONSTANT.elimina,
           icon: ICON_CONSTANT.delete,
           type: 'icon',

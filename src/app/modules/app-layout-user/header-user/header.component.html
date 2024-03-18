@@ -6,8 +6,8 @@
           <img src="./../../../../../assets/images/logo-inbook.png" />
         </figure>
         <span class="example-spacer"></span>
+        <mat-icon class="cart_icon" (click)="openCart()">shopping_cart</mat-icon>
         <div class="flex-items" [matMenuTriggerFor]="menu">
-          <mat-icon class="cart_icon" (click)="openCart()">shopping_cart</mat-icon>
           <div class="round-img-profile">
             <img [src]="image" *ngIf="image; else noImage">
             <ng-template #noImage>

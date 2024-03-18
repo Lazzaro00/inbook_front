@@ -51,6 +51,16 @@ export class ProfileComponent {
         if (this.aData && this.aData.images) {
           this.imageUrl = 'data:image/jpeg;base64,' + this.aData.images
           console.log(this.aData.images);
+        } else {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if (ctx){
+            canvas.width = 200; 
+            canvas.height = 200; 
+            ctx.fillStyle = 'lightblue'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            this.imageUrl = canvas.toDataURL();
+            }
         }
     
       } catch (error) {
