@@ -3,26 +3,21 @@
     <mat-toolbar color="accent">
       <mat-toolbar-row>
         <figure>
-          <img src="./../../../../../assets/images/logo-contrader-header.svg" />
+          <img src="./../../../../../assets/images/logo-inbook.png" />
         </figure>
         <span class="example-spacer"></span>
-        <mat-icon class="cart_icon" (click)="openCart()">shopping_cart</mat-icon>
-        <div class="mr-12">
-        </div>
         <div class="flex-items" [matMenuTriggerFor]="menu">
+          <mat-icon class="cart_icon" (click)="openCart()">shopping_cart</mat-icon>
           <div class="round-img-profile">
-            <div class="profile-avatar">
-              <p>
-                {{ (sessioneUtente.email | slice : 0 : 1 | uppercase) || ""
-                }}
-              </p>
-            </div>
+            <img [src]="image" *ngIf="image; else noImage">
+            <ng-template #noImage>
+              <div class="profile-avatar">
+                <p>{{ (sessioneUtente.email | slice : 0 : 1 | uppercase) || "" }}</p>
+              </div>
+            </ng-template>
           </div>
-          <span
-            >
-            {{ sessioneUtente.email || "" | titlecase }}
-            </span
-          >
+          <span>&nbsp;</span>
+          <span>{{ sessioneUtente.email || "" }}</span>
           <button mat-icon-button class="example-icon">
             <mat-icon>expand_more</mat-icon>
           </button>

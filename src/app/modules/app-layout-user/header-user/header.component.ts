@@ -13,6 +13,9 @@ import {
 import { SessioneUtenteModel } from 'src/app/models';
 import { WorkInProgressComponent } from 'src/app/shared';
 import { Cart } from 'src/app/shared/cart/cart.component';
+import UtentiComponent from '../../utenti/utenti/utenti.component';
+import { UtentiService } from 'src/app/services/utenti.service';
+import { registrationModelResponse } from 'src/app/models/registration.model';
 // import { SetTextByUrlPipe } from 'src/app/pipes';
 
 // import { GenericConfirmModalComponent } from 'src/app/shared/components/generic-confirm-modal/generic-confirm-modal.component';
@@ -38,6 +41,7 @@ export class HeaderComponentUser {
   nominativoUtenteListener!: Subscription;
   /** Il nominativo dell'utente */
   sessioneUtente!: SessioneUtenteModel;
+  image:any;
   /** Indica se l'utente è ADMIN */
   isAdmin!: boolean;
   dialogRef: MatDialogRef<Cart> | undefined;
@@ -53,7 +57,8 @@ export class HeaderComponentUser {
     public loginService: LoginService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utentiService: UtentiService
   ) {}
 
   /**
@@ -64,12 +69,21 @@ export class HeaderComponentUser {
   ngOnInit(): void {
     // this.isAdmin = this.loginService.isAdmin();
      this.sessioneUtente = this.loginService.getUtenteSessione();
+     this.getProfileImage();
     this.nominativoUtenteListener = this.loginService
       .updateNominativoUtenteListener()
       .subscribe((res: SessioneUtenteModel) => {
         console.log("utente:" + res.email);
         this.sessioneUtente = res;});
   }
+
+  getProfileImage(){
+    this.utentiService.getAnagByMail(this.sessioneUtente.email).subscribe((res:registrationModelResponse) => {
+      if (res.images != null)
+      this.image = 'data:image/jpeg;base64,' + res.images;
+    });
+  }
+
 
   /**
    * Lifecycle hook per l'onDestroy
