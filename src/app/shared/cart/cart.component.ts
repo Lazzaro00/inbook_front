@@ -43,17 +43,15 @@ export class Cart {
   }
 
   totalprice(){
-    this.subtotal = 0;
-    for (let book of this.bookInCart){
-      if(book.book?.price != null)
-      this.subtotal += (book.book?.price * book.quantitySelected);
-    }
-    this.total = this.subtotal;
+    this.cartService.totalprice();
+    this.total = this.cartService.total;
+    this.subtotal = this.cartService.subtotal;
   }
 
   endOrder(){
     this.cartService.moveFromCartToBuy().subscribe({
       next:(res) => {
+        this.cartService.empty();
         this.cartClose();
         this.route.navigate(["/user/endOrder"]);
       }

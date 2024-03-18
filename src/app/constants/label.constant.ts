@@ -23,7 +23,8 @@ export const LABEL_CONSTANT = {
   work_in_progress: 'WORK IN PROGRESS',
   pagina_non_disponibile: 'La pagina alla quale stai cercando di accedere non è ancora disponibile',
   modifica: 'Modifica',
-  elimina: 'Elimina'
+  elimina: 'Elimina',
+  visual: 'Visualizza'
 };
 
 /** Costante per la stringa da far visualizzare in caso di tabella vuota */

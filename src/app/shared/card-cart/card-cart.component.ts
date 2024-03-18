@@ -19,7 +19,7 @@ import { Cart } from '../cart/cart.component';
 })
 export class CardCart {
 
-  constructor(private router:Router, private cartService:CartService, private cartC:Cart){}
+  constructor(private router:Router, private cartService:CartService){}
 
   @Input()
   idCart:number = 0;
@@ -53,7 +53,7 @@ export class CardCart {
   deleteFromCart(){
     this.cartService.delete(this.idCart).subscribe({
       next:(res:any) =>{
-        this.cartC.totalprice();
+        this.cartService.totalprice();
       },
     });
   }

@@ -15,17 +15,11 @@ export class CartService {
 
   bookInCart:Array<CartBookModel>=[];
   riepilogo:Array<CartBookModel>=[];
+  total:number = 0;
+  subtotal:number = 0;
 
   constructor(private http: HttpClient, private loginService:LoginService) { 
-    var email = this.loginService.getUtenteSessione().email;
-    this.getByEmail(email).subscribe({
-      next:(res) => {
-        this.bookInCart = res;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+    this.get(loginService);
   }
 
   getBookInCart(){
@@ -37,8 +31,12 @@ export class CartService {
   }
 
   addBookInCart(book:any){
-    console.log("addInCart ", book, this.bookInCart)
-    this.bookInCart.push(book);
+    const foundIndex = this.bookInCart.findIndex(item => item.id === book.id);
+    if (foundIndex !== -1) {
+          this.bookInCart[foundIndex].quantitySelected += book.quantitySelected;
+      } else {
+          this.bookInCart.push({...book});
+      }
   }
 
   empty(){
@@ -76,11 +74,32 @@ export class CartService {
     return this.http.get<any>(url);
   }
 
+  get(loginService:LoginService){
+    var email = this.loginService.getUtenteSessione().email;
+    this.getByEmail(email).subscribe({
+      next:(res) => {
+        this.bookInCart = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   moveFromCartToBuy(){
     const url = `${this.baseUrl}/buy`;
     this.riepilogo = this.bookInCart;
-    this.empty();
     return this.http.post<any>(url,this.bookInCart);
+  }
+
+
+  totalprice(){
+    this.subtotal = 0;
+    for (let book of this.bookInCart){
+      if(book.book?.price != null)
+      this.subtotal += (book.book?.price * book.quantitySelected);
+    }
+    this.total = this.subtotal;
   }
 
   
