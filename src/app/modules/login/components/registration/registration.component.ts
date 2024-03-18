@@ -20,6 +20,7 @@ interface Gender {
   value: string;
   viewValue: string;
 }
+
 /**
  * @title Stepper overview
  */
@@ -59,6 +60,7 @@ export class RegistrationComponent {
   ]
   usertypes: String[] = ["ADMIN", "USER"];
 
+  
   registrationUserForm = this._formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -86,8 +88,15 @@ export class RegistrationComponent {
     password: ['', Validators.required],
   })
 
+  
+
   fourthFormGroup = this._formBuilder.group({
-    library: [''],
+    id: [''],
+    admins:{
+      email:'', 
+      password: null,
+      usertype: null
+    },
     password: [''],
   })
   isLinear = true;
@@ -178,7 +187,7 @@ export class RegistrationComponent {
     let user = this.registrationUserForm.value;
     let payload = { ...this.thirdFormGroup.value, 
     admins:[{
-      mail:user.email, 
+      email:user.email, 
       password: null,
       usertype: null
     }]};
@@ -203,7 +212,8 @@ export class RegistrationComponent {
   }
 
   insertExistLibrary(){
-    let payload = this.fourthFormGroup.value;
+    let user = this.registrationUserForm.value;
+    let payload = {id:this.fourthFormGroup.value.id, admins:[{email:user.email, password: null, usertype: null}], password:this.fourthFormGroup.value.password};
     this.libraryService.insertExistLibrary(payload).subscribe({
       next: (res) => {
         console.log("verifica andata a buon fine")

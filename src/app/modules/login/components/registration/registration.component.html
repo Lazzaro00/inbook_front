@@ -104,8 +104,8 @@
         <div *ngIf="newLibrary">
           <mat-form-field id="firstdiv">
             <mat-label>Seleziona libreria</mat-label>
-            <mat-select formControlName="library">
-              <mat-option *ngFor="let lib of libraryLit" [value]="lib">{{ lib.name }}</mat-option>
+            <mat-select formControlName="id">
+              <mat-option *ngFor="let lib of libraryLit" [value]="lib.id">{{ lib.name }}</mat-option>
             </mat-select>
           </mat-form-field>
 
