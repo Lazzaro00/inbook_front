@@ -110,7 +110,7 @@ export class LoginService {
     if (this.panelService.parentComponentRef) {
       this.panelService.parentComponentRef.instance.closeDialog();
     }
-    this.router.navigateByUrl('/login/login');
+    this.router.navigate(['/login']);
   }
 
   /**

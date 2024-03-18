@@ -13,7 +13,8 @@ import { SigninService } from 'src/app/services/signin.service';
 import { PanelService } from 'src/app/services';
 import { registrationOk } from 'src/app/shared/registrationOk/registrationOk.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { LibraryService } from 'src/app/services/library.service';
 
 interface Gender {
   value: string;
@@ -30,6 +31,7 @@ interface Gender {
 
   standalone: true,
   imports: [
+    MatButtonToggleModule,
     CommonModule,
     MatSelectModule,
     MatDatepickerModule,
@@ -46,7 +48,10 @@ interface Gender {
 export class RegistrationComponent {
   buttonDisabled:boolean = true;
   mostra:boolean = true;
-  
+  isUser:boolean = false;
+  newLib:boolean = true;
+  newLibrary:boolean = true;
+  libraryLit: any[] = [];
 
   genere: Gender[] = [
     {value: 'Male', viewValue: 'Uomo'},
@@ -71,29 +76,49 @@ export class RegistrationComponent {
     address: ['', Validators.required],
   
   });
+  thirdFormGroup = this._formBuilder.group({
+    id:[],
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    province: ['', Validators.required],
+    city: ['', Validators.required],
+    address: ['', Validators.required],
+    password: ['', Validators.required],
+  })
+
+  fourthFormGroup = this._formBuilder.group({
+    library: [''],
+    password: [''],
+  })
   isLinear = true;
   constructor(
     private _formBuilder: FormBuilder,
     private dialog:MatDialog,
     private panelService:PanelService,
     private router:Router,
-    private signinService:SigninService
+    private signinService:SigninService,
+    private libraryService: LibraryService
     ) {
-    
-      
+      this.registrationUserForm.valueChanges.subscribe(() => {
+      const password = this.registrationUserForm.get('password')?.value;
+      const confirmPassword = this.registrationUserForm.get('confirm_password')?.value;
 
-
-  this.registrationUserForm.valueChanges.subscribe(() => {
-        const password = this.registrationUserForm.get('password')?.value;
-        const confirmPassword = this.registrationUserForm.get('confirm_password')?.value;
-  
-        if (password === confirmPassword) {
-          this.buttonDisabled = false;
-        } else {
-          this.buttonDisabled = true;
-        }
-      });
+      if (password === confirmPassword) {
+        this.buttonDisabled = false;
+      } else {
+        this.buttonDisabled = true;
+      }
+    });
   }
+
+  ngOnInit(){
+    this.libraryService.getall().subscribe({
+      next: (res) => {
+        this.libraryLit = res;
+      }
+    })
+  }
+
 
   backToLogin(): void {
     this.dialog.closeAll();
@@ -131,6 +156,36 @@ export class RegistrationComponent {
     console.log(payload);
     this.signinService.signin(payload).subscribe({
       next: () => {
+        if(this.isUser){
+          this.dialog.open(registrationOk, {
+            width: '660px',
+            height: '420px',
+            disableClose: true,
+          }).afterOpened().subscribe({
+            next: () => {
+              this.mostra = false;
+            }
+          });
+
+        }
+      },
+
+      error: (e) => {console.log(e)}
+    });
+  }
+
+  bibliotec(){
+    let user = this.registrationUserForm.value;
+    let payload = { ...this.thirdFormGroup.value, 
+    user:{
+      mail:user.email, 
+      password: null,
+      usertype: null
+    }};
+
+    console.log(payload)
+    this.signinService.registerBiblioteca(payload).subscribe({
+      next: () => {
         this.dialog.open(registrationOk, {
           width: '660px',
           height: '420px',
@@ -140,11 +195,48 @@ export class RegistrationComponent {
             this.mostra = false;
           }
         });
-        },
 
-      error: (e) => {console.log(e)}
+      }, 
+
+      error: (e) => (console.error("errore registerbibl:", e))
+    })
+  }
+
+  insertExistLibrary(){
+    let payload = this.fourthFormGroup.value;
+    this.libraryService.insertExistLibrary(payload).subscribe({
+      next: (res) => {
+        console.log("verifica andata a buon fine")
+      }, 
+      error: (e) => {console.error("errore: " + e)}
     });
   }
+
+  whatisusert(value: any){
+    console.log("entrato nel whatisudert")
+    if(value === "ADMIN"){
+      this.isUser = false;
+    }else if(value === "USER"){
+      this.isUser = true;
+    }else{
+      console.error("Nessun valore tovato!")
+    }
+  }
+
+  onToggleChange(event: any) {
+    console.log('Toggle cambiato:', event.value);
+    // Qui puoi eseguire azioni in base al toggle selezionato
+    if (event.value === 'existingLibrary') {
+      console.log("esiste")
+      this.newLibrary = true;
+      this.newLib = false;
+    } else if (event.value === 'notExistingLibrary') {
+      console.log("non esiste")
+      this.newLibrary = false;
+      this.newLib = true;
+    }
+  }
+
 
 }
     

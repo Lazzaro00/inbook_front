@@ -1,5 +1,6 @@
 .background{
-  background-image: url("../../../../../assets/images/backgroud-registrazione.png");
+  background-image: url("../../../../../assets/images/backgroud-registrazione.jpg");
+  background-size: cover;
   height: 47.9vw;
   width: 100vw;
 
@@ -77,4 +78,12 @@
 
 .title{
   color:rgb(255, 148, 0);
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-width {
+  width: 136%;
 }

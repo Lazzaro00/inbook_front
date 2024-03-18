@@ -43,19 +43,19 @@ export class Cart {
   }
 
   totalprice(){
+    this.subtotal = 0;
     for (let book of this.bookInCart){
       if(book.book?.price != null)
-      this.subtotal += book.book?.price;
+      this.subtotal += (book.book?.price * book.quantitySelected);
     }
     this.total = this.subtotal;
   }
 
   endOrder(){
-    this.cartService.moveFromCartToBuy(this.bookInCart).subscribe({
+    this.cartService.moveFromCartToBuy().subscribe({
       next:(res) => {
+        this.cartClose();
         this.route.navigate(["/user/endOrder"]);
-        console.log("problem")
-        //this.bookInCart = this.cartService.empty();
       }
     });
   }

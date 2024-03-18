@@ -38,6 +38,7 @@ export class CardBook {
   button:boolean = true;
 
   cartBookModel : CartBookModel={
+    id:0,
     user:null,
     book:null,
     quantitySelected:0
@@ -87,7 +88,7 @@ export class CardBook {
       }
     };
     // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
-    this.router.navigate(['/book/read'], navigationExtras);
+    this.router.navigate(['/user/book/read'], navigationExtras);
   }
 
 }

@@ -35,7 +35,7 @@ export const SIDENAV_MENU_CONSTANT = [
       {
         wip: false, // Booleana per il controllo se la pagina è in work in progress
         name: 'Aggiungi prodotto',
-        path: '/book/insert-product',
+        path: 'user/book/insert-product',
       }
     ]
   }
