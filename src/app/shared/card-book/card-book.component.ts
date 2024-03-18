@@ -74,6 +74,8 @@ export class CardBook {
     var email = this.loginService.getUtenteSessione().email;
     this.cartService.insert(email,this.id,this.quantitySelected).subscribe({
       next:(res) => {
+        this.cartBookModel.id = res.id;
+        this.cartBookModel.user = res.user;
         this.cartBookModel.book=res.book;
         this.cartBookModel.quantitySelected=this.quantitySelected;
         this.cartService.addBookInCart(this.cartBookModel);
