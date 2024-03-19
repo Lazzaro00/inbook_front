@@ -19,10 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../shared/end-order/end-order.component').then((m) => m.EndOrder)
       },
 
-      {
-        path:"historical",
-        loadComponent:() => import("../../modules/user/components/historical/historical.component").then((m) => m.Historical)
-      },
+      // {
+      //   path:"historical",
+      //   loadComponent:() => import("../../modules/user/components/historical/historical.component").then((m) => m.Historical)
+      // },
             {
         path:'book',
         loadChildren:()=>
@@ -34,10 +34,10 @@ export const routes: Routes = [
         loadChildren:()=>
         import('../login/components/user-details/user-details.routing').then((m)=>m.routes)
        },
-        {
-        path:'orderDetail',
-        loadComponent:() => import('../user/components/order-detail/order-detail.component').then((m) => m.OrderDetail),
-        },
+        // {
+        // path:'orderDetail',
+        // loadComponent:() => import('../user/components/order-detail/order-detail.component').then((m) => m.OrderDetail),
+        // },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/utils';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -52,7 +52,7 @@ export class Historical {
   iduser:Number = 0;
 
   constructor(private buyService : BuyService, private loginService:LoginService, private utentiService:UtentiService,
-    private router: Router){}
+    private router: Router, private route:ActivatedRoute){}
 
   ngOnInit(){
     var email = this.loginService.getUtenteSessione().email;
@@ -64,7 +64,6 @@ export class Historical {
               this.totalElements = res.totalElements;
               this.pageIndex = res.pageIndex;
               this.orderList = res;
-              console.log(this.orderList)
           
               if (this.orderList) {
                 this.dataSource = new MatTableDataSource<any>(
@@ -106,8 +105,7 @@ export class Historical {
   OpenOrder(orderNumber:number){
     let listFiltered = this.orderList.filter(obj => obj.orderNum === orderNumber);
     this.buyService.setListFiltered(listFiltered);
-    console.log("Lista ORDINE", this.orderList);
-    this.router.navigate(["user/orderDetail"]);
+    this.router.navigate(["/user/details/orderDetail"]);
   }
 
   changePage(event:any){
