@@ -54,7 +54,7 @@
   .buttons-container {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Posiziona i pulsanti ai due lati */
+    justify-content: flex-end;
   }
 
   .right-button {

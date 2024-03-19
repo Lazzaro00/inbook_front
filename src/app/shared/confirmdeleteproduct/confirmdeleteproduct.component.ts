@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: true,
   imports: [CommonModule, AngularMaterialModule],
   templateUrl: './confirmdeleteproduct.component.html',
-  styleUrls: ['./confirmdeleteprodct.component.scss'],
+  styleUrls: ['./confirmdeleteproduct.component.scss'],
 })
 export class confirmdeleteproduct {
   /** Costante per le label generiche */
