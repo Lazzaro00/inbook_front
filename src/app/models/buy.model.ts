@@ -7,6 +7,7 @@ export interface buyModelRequest{
     book:bookModelRequest;
     quantity:number;
     date:Date;
+    orderNum:number;
 }
 
 export interface buyModelResponse{
@@ -15,4 +16,5 @@ export interface buyModelResponse{
     book:bookModelResponse;
     quantity:number;
     date:Date;
+    orderNum:number;
 }
