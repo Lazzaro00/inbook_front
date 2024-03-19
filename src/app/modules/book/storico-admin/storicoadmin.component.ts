@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, NavigationExtras } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/utils';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +16,7 @@ import { LoginService } from 'src/app/services';
 import { UtentiService } from 'src/app/services/utenti.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { LibraryService } from 'src/app/services/library.service';
+import { deleteproduct } from 'src/app/shared/delete-product/deleteproduct.component';
 
 
 /** Una classe per il componente del layout quando non si è loggati */
@@ -24,7 +25,7 @@ import { LibraryService } from 'src/app/services/library.service';
   selector: 'storico-admin',
   templateUrl: './storicoadmin.component.html',
   styleUrls: ['./storicoadmin.component.scss'],
-  imports: [RouterModule, AngularMaterialModule, MatCardModule,MatIconModule, GenericTableComponent, AppLayoutComponent, CommonModule],
+  imports: [RouterModule, AngularMaterialModule, MatCardModule,MatIconModule, GenericTableComponent, AppLayoutComponent, CommonModule,],
 })
 export class storicoadmin {
 
@@ -49,6 +50,7 @@ export class storicoadmin {
   bookList: any[] = [];
   datePipe: any;
   iduser:Number = 0;
+  book:number = 0;
 
   constructor(
     private buyService : BuyService,
@@ -56,7 +58,8 @@ export class storicoadmin {
     private utentiService:UtentiService,
     private libraryService:LibraryService,
     private bookService:BookService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
     ){}
 
   ngOnInit(){
@@ -94,19 +97,19 @@ export class storicoadmin {
           title: LABEL_CONSTANT.visual,
           icon: ICON_CONSTANT.visual,
           type: 'icon',
-          callback: () => this.OpenOrder(),
+          callback: () => this.read(r.id),
         },
         {
             title: LABEL_CONSTANT.modifica,
             icon: ICON_CONSTANT.edit,
             type: 'icon',
-            callback: () => this.OpenOrder(),
+           // callback: () => this.OpenOrder(),
         },
         {
           title: LABEL_CONSTANT.elimina,
           icon: ICON_CONSTANT.delete,
           type: 'icon',
-          callback: () => this.OpenOrder(),
+          callback: () => this.delete(r.id),
         },
       ];
       // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
@@ -122,7 +125,37 @@ export class storicoadmin {
     });
   }
 
-  OpenOrder(){}
+  read(idBo: number){
+
+    if(idBo != null){
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+          
+            id: idBo
+        }
+      };
+      // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
+      this.router.navigate(['user/book/read'], navigationExtras);
+    }
+
+
+  }
+
+  delete(idB: number){
+    this.dialog.open(deleteproduct, {
+      width: '660px',
+      height: '300px',
+      disableClose: true,
+      data: { id: idB }
+    }).afterClosed().subscribe({
+      next: (x) => {
+        this.bookList = this.bookList.filter(book => book.id !== idB);
+        this.dataSource = new MatTableDataSource<any>(
+          this.getMappedDataSource(this.bookList)
+        );
+      }
+    });
+  }
 
   changePage(event:any){
 
