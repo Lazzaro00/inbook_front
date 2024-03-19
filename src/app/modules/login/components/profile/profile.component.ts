@@ -50,7 +50,6 @@ export class ProfileComponent {
         this.aData = await this.utentiService.getAnagByMail(this.loginService.getUtenteSessione().email).toPromise();
         if (this.aData && this.aData.images) {
           this.imageUrl = 'data:image/jpeg;base64,' + this.aData.images
-          console.log(this.aData.images);
         } else {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
