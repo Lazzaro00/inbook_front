@@ -40,4 +40,10 @@ export class BookService {
     const url = `${this.baseUrl}/getAllCategory`;
     return this.http.get<string[]>(url);
   }
+
+  getByLibraryId(id:number, pageNum:number, pageSize:number):Observable<any>{
+    const url = `${this.baseUrl}/getByLibraryPageable?libraryId=${id}&pageNum=${pageNum}&pageSize=${pageSize}`;
+    return this.http.get<any>(url);
+  }
+
 }
