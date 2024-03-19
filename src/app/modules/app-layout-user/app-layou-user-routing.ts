@@ -29,6 +29,11 @@ export const routes: Routes = [
         import('../../modules/book/book-routing').then((m) => m.routes),
 
       },
+      {
+        path:'details',
+        loadChildren:()=>
+        import('../login/components/user-details/user-details.routing').then((m)=>m.routes)
+      },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

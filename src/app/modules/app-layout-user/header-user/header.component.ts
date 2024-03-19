@@ -110,7 +110,7 @@ export class HeaderComponentUser {
   }
 
   profile(): void{
-    this.router.navigate(["/login/profile"]);
+    this.router.navigate(["/user/details"]);
   }
 
   openCart(): void {
