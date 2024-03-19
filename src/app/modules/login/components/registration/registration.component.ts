@@ -84,6 +84,7 @@ export class RegistrationComponent {
     description: ['', Validators.required],
     province: ['', Validators.required],
     city: ['', Validators.required],
+    //nation:['', Validators.required],
     address: ['', Validators.required],
     password: ['', Validators.required],
   })
@@ -202,6 +203,7 @@ export class RegistrationComponent {
         }).afterOpened().subscribe({
           next: () => {
             this.mostra = false;
+            this.router.navigate(["/gestionale"]);
           }
         });
 
@@ -216,7 +218,8 @@ export class RegistrationComponent {
     let payload = {id:this.fourthFormGroup.value.id, admins:[{email:user.email, password: null, usertype: null}], password:this.fourthFormGroup.value.password};
     this.libraryService.insertExistLibrary(payload).subscribe({
       next: (res) => {
-        console.log("verifica andata a buon fine")
+        console.log("verifica andata a buon fine");
+        this.router.navigate(["/gestionale"]);
       }, 
       error: (e) => {console.error("errore: " + e)}
     });

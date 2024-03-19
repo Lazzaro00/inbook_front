@@ -20,12 +20,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import("./components/registration/registration.component").then((m) => m.RegistrationComponent)
       },
-      {
-        path: 'profile',
-        title: 'Profile infos', 
-        loadComponent: () =>
-          import('./components/profile/profile.component').then((m) => m.ProfileComponent),
-      },
     ],
   },
 ];

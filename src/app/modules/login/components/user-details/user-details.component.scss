@@ -1,0 +1,39 @@
+div{
+    margin-left: 15px;
+    width: 30%;
+}
+
+h3{
+    position: relative;
+    left: 5%;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    
+   }
+
+   .containerL{
+    flex-basis: 20%;
+    margin-left: 35px;
+   }
+   
+   .containerL [router-outlet="left"] {
+    width: 100%;
+   }
+
+   .containerR{
+    flex-basis: 60%;
+    margin-top: 20px;
+    margin-left: 100px; 
+   }
+   
+   .containerR [router-outlet="right"] {
+    width: 100%;
+   }
+  
+  
+  
