@@ -15,6 +15,7 @@ import { BuyService } from 'src/app/services/buy.service';
 import { LoginService } from 'src/app/services';
 import { UtentiService } from 'src/app/services/utenti.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { buyModelResponse } from 'src/app/models/buy.model';
 
 
 
@@ -36,9 +37,9 @@ export class Historical {
   displayedColumns = TABLE_COLUMNS.historical;
   azioniDiGruppo = TABLE_GROUP_ACTIONS_CONSTANT_VISUAL;
   cellHeadTypes = {
-    idOrder: 'sort',
-    dateOrder: 'sort',
-    priceOrder: 'sort',
+    idOrder: '',
+    dateOrder: '',
+    priceOrder: '',
   };
   sortedItems = {
     idOrder: false,
@@ -46,11 +47,12 @@ export class Historical {
     priceOrder: false,
   };
 
-  orderList: any[] = [];
+  orderList: buyModelResponse[] = [];
   datePipe: any;
   iduser:Number = 0;
 
-  constructor(private buyService : BuyService, private loginService:LoginService, private utentiService:UtentiService){}
+  constructor(private buyService : BuyService, private loginService:LoginService, private utentiService:UtentiService,
+    private router: Router){}
 
   ngOnInit(){
     var email = this.loginService.getUtenteSessione().email;
@@ -66,7 +68,7 @@ export class Historical {
           
               if (this.orderList) {
                 this.dataSource = new MatTableDataSource<any>(
-                  this.getMappedDataSource(this.orderList)
+                  this.getMappedDataSource(this.matchRow(this.orderList))
                 );
               }
            } catch (e) {
@@ -79,39 +81,62 @@ export class Historical {
     
   }
 
-  async getDataFromResolver() {
-    
-   }
 
    getMappedDataSource(toMap: any[]) {
-    // Mappiamo il nostro array di oggetti ricevuto dal backend
     return toMap.map((r) => {
-      // Creiamo un'array di azioni che l'utente puo effettuare sulla tabella
       const action = [
         
         {
           title: LABEL_CONSTANT.visual,
           icon: ICON_CONSTANT.visual,
           type: 'icon',
-          callback: () => this.OpenOrder(),
+          callback: () => this.OpenOrder(r.orderNum),
         },
       ];
-      // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
       return {
-        idOrder: r.idOrder,
-        dateOrder: r.dateOrder,
-        price: r.priceOrder,
+        idOrder: r.orderNum,
+        dateOrder: r.date,
+        priceOrder: r.priceOrder,
         select: false,
-        // dataCreazione: this.datePipe.trasform(r.dataCreazione, 'dd/MM/yyyy'),
         action: action,
       };
     });
   }
 
-  OpenOrder(){}
+  OpenOrder(orderNumber:number){
+    let listFiltered = this.orderList.filter(obj => obj.orderNum === orderNumber);
+    this.buyService.setListFiltered(listFiltered);
+    console.log("Lista ORDINE", this.orderList);
+    this.router.navigate(["user/orderDetail"]);
+  }
 
   changePage(event:any){
 
   }
 
+
+
+  matchRow(list:buyModelResponse[]){
+    let newList: order[] = [];
+    list.forEach((element: any) => {
+      let index = newList.findIndex(item => item.orderNum === element.orderNum);
+      if(index === -1){
+      newList.push({
+        orderNum: element.orderNum,
+        date : element.date,
+        priceOrder : element.book.price
+      });
+      }else{
+        newList[index].priceOrder += element.book.price
+      }
+  });
+  return newList;
+  }
+}
+
+interface order {
+  orderNum: number;
+  date : any,
+  priceOrder : number
+  
 }

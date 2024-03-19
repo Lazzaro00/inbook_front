@@ -1,0 +1,20 @@
+<div class = "order-date">
+  <button (click)="goBack()">Torna Indietro</button>
+  <span>{{date}}</span>
+</div>
+
+<h3>Dettaglio ordine {{orderNum}}</h3>
+
+<app-generic-table
+      class = "app-generic-table"
+      [pageIndex]="pageIndex"
+      [size]="size"
+      [totalElements]="totalElements"
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [cellHeadTypes]="cellHeadTypes"
+      [hasSearch]="false"
+      [hasSelect]="false"
+      [azioniDiGruppo]="azioniDiGruppo"
+      (emitChangePage)="changePage($event)"
+    ></app-generic-table>

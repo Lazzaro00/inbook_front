@@ -33,7 +33,11 @@ export const routes: Routes = [
         path:'details',
         loadChildren:()=>
         import('../login/components/user-details/user-details.routing').then((m)=>m.routes)
-      },
+       },
+        {
+        path:'orderDetail',
+        loadComponent:() => import('../user/components/order-detail/order-detail.component').then((m) => m.OrderDetail),
+        },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

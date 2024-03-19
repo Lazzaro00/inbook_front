@@ -1,0 +1,12 @@
+<app-generic-table
+      [pageIndex]="pageIndex"
+      [size]="size"
+      [totalElements]="totalElements"
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [cellHeadTypes]="cellHeadTypes"
+      [hasSearch]="false"
+      [hasSelect]="false"
+      [azioniDiGruppo]="azioniDiGruppo"
+      (emitChangePage)="changePage($event)"
+    ></app-generic-table>
