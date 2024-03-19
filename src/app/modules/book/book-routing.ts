@@ -23,7 +23,13 @@ export const routes: Routes = [
           title: 'Insert',
           loadComponent: () =>
           import("./insert/insertproduct.component").then((m) => m.InsertProduct)
-      },
+        },
+        {
+          path:"storico-admin",
+          title: 'storico',
+          loadComponent: () =>
+          import("./storico-component/storico-component.component").then((m) => m.storicocomponent)
+        },
     ],
   },
 ];

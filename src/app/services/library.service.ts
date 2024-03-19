@@ -52,7 +52,7 @@ export class LibraryService {
   }
 
   insertExistLibrary(payload: any){
-    const url = `${this.baseUrl}/`;
+    const url = `${this.baseUrl}/registration`;
     return this.http.post<any>(url, payload);
   }
 }

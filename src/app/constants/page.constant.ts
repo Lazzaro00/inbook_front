@@ -18,7 +18,7 @@ export const SIDENAV_MENU_CONSTANT = [
     wip: true,
     name: 'Il tuo profilo',
     icon: 'person',
-    path: '/gestionale/profilo',
+    path: '/login/profile',
   },
   {
     name: 'Prodotti',
@@ -30,7 +30,7 @@ export const SIDENAV_MENU_CONSTANT = [
       {
         wip: false, // Booleana per il controllo se la pagina è in work in progress
         name: 'Tutti i prodotti',
-        path: '/book/get-all-book',
+        path: 'gestionale/book/storico-admin',
       },
       {
         wip: false, // Booleana per il controllo se la pagina è in work in progress

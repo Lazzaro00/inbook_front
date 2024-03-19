@@ -1,0 +1,28 @@
+<div class="containerbis">
+  <div class="container">
+    <div class="image-container">
+      <img [src]="imageUrl" alt="Profile Image">
+    </div>
+
+    <div class="details">
+      <h3>{{ aData?.name }} {{ aData?.surname }}</h3>
+      <h4>{{ aData?.user?.email }}</h4>
+      <br>
+      <p><b>GENERE</b></p>
+      <p>{{ aData?.gender }}</p>
+
+      <p><b>DATA DI NASCITA</b></p>
+      <p>{{ aData?.birth_date }}</p>
+
+      <p><b>DATI DI RESIDENZA</b></p>
+      <p>{{ aData?.address }} - {{ aData?.city }} ({{ aData?.province }})</p>
+    </div>
+    <br><br><br>
+    <div class="button-container">
+        <button id="editButton" (click)="anagEdit(aData?.id)" mat-button>
+          <b>MODIFICA</b>
+        </button>
+    
+      </div>
+  </div>
+</div>
