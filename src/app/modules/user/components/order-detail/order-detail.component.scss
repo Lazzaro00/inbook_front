@@ -50,10 +50,10 @@
 
 .order-date{
   display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        padding: 30px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
 }
 
 h3{
@@ -62,4 +62,11 @@ h3{
 
 .app-generic-table{
   margin:10px;
+}
+
+
+.total{
+  display: flex; 
+  justify-content: flex-end; 
+  padding-right: 10vw;
 }

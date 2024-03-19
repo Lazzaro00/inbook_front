@@ -11,4 +11,6 @@ import { HeaderComponentUser } from 'src/app/modules/app-layout-user/header-user
   imports: [RouterModule, ProfileComponent, HeaderComponent, HeaderComponentUser],
 
 })
-export default class UserDetailsComponent {}
+export default class UserDetailsComponent {
+
+}

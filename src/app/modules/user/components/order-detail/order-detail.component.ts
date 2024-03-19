@@ -48,17 +48,20 @@ export class OrderDetail {
   iduser:Number = 0;
   orderNum: number = 0;
   date:Date = new Date;
+  total: number = 0;
 
   constructor(private buyService : BuyService, private loginService:LoginService, private utentiService:UtentiService,
-    private router: Router){}
+    private router: Router){
+      console.log("Sono Nato");
+    }
 
   ngOnInit(){
-      
       this.filteredList = this.buyService.getListFiltered();
       this.totalElements = this.filteredList.length;
       this.pageIndex = 0;
       this.orderNum = this.filteredList[0].orderNum;
       this.date = this.filteredList[0].date;
+      this.totalPrice();
       if (this.filteredList) {
         this.dataSource = new MatTableDataSource<any>(
         this.getMappedDataSource(this.filteredList)
@@ -85,7 +88,15 @@ export class OrderDetail {
   }
 
   goBack(){
-    this.router.navigateByUrl('user/historical');
+    this.router.navigateByUrl('user/details');
+  }
+
+  totalPrice(){
+    this.filteredList.forEach(element =>{
+      this.total += element.book.price;
+    }
+      
+    );
   }
 
 
