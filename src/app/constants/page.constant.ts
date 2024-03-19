@@ -30,7 +30,7 @@ export const SIDENAV_MENU_CONSTANT = [
       {
         wip: false, // Booleana per il controllo se la pagina è in work in progress
         name: 'Tutti i prodotti',
-        path: 'user/book/get-all-book',
+        path: 'gestionale/book/storico-admin',
       },
       {
         wip: false, // Booleana per il controllo se la pagina è in work in progress
