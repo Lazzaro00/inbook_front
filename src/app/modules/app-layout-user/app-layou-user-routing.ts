@@ -29,6 +29,10 @@ export const routes: Routes = [
         import('../../modules/book/book-routing').then((m) => m.routes),
 
       },
+      {
+        path:'orderDetail',
+        loadComponent:() => import('../user/components/order-detail/order-detail.component').then((m) => m.OrderDetail),
+      },
     
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

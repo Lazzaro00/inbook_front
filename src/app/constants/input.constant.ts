@@ -43,12 +43,11 @@ export const TABLE_INPUT_CONSTANT = {
   idOrder:"ID ORDINE", 
   dateOrder:"DATA ORDINE", 
   priceOrder:"COSTO",
+  product: 'PRODOTTO',
   name: "NOME PRODOTTO",
   category:"CATEGORIA",
   quantity:"QUANTITÀ",
   price:"PREZZO"
-
-
 };
 
 
@@ -70,5 +69,6 @@ export const TABLE_GROUP_ACTIONS_CONSTANT_VISUAL = [
 export const TABLE_COLUMNS = {
   utenti: ['select', 'name', 'surname', 'email', 'action'],
   historical:['idOrder', 'dateOrder', 'priceOrder','action'],
+  orderDetail:['product', 'quantity', 'price'],
   storico_admin:['name', 'category', 'price', 'quantity', 'action']
 };
