@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { registrationModelResponse } from '../models/registration.model';
+import { registrationModelRequest, registrationModelResponse } from '../models/registration.model';
 
 /** Service per il modulo degli utenti, conterrà al suo interno tutte le funzionalità collegate agli utenti  */
 @Injectable({ providedIn: 'root' })
@@ -67,6 +67,11 @@ export class UtentiService {
   getAnagByMail(email:String):Observable<registrationModelResponse>{
     let url = `${this.baseUrl}anag/getByUserEmail?email=${email}`;
     return this.http.get<registrationModelResponse>(url);
+  }
+
+  saveAnagraphic(payload:registrationModelRequest){
+    let url = `${this.baseUrl}anag/update`;
+    return this.http.put<registrationModelResponse>(url,payload);
   }
   
   
