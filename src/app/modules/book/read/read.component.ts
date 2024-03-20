@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { ImageService } from 'src/app/services/image.service';
 import { bookModelResponse } from '../../../models/book.model';
@@ -9,6 +9,9 @@ import { LibraryService } from 'src/app/services/library.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { CartService } from 'src/app/services/cart.service';
+import { CartBookModel } from 'src/app/models/cart.model';
+import { LoginService } from 'src/app/services';
 
 export interface Tile {
  color: string;
@@ -38,13 +41,26 @@ export class ReadComponent implements OnInit {
     { imgUrl: '../../../../../assets/images/book/4.jpg', cols: 1, rows: 1, color: '#f9f9f9' },
  ];
 
+ quantitySelected: number = 1;
+
+ cartBookModel : CartBookModel={
+  id:0,
+  user:null,
+  book:null,
+  quantitySelected:0
+};
+
  constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private bookService: BookService,
     private imageService: ImageService,
     private libraryService: LibraryService,
-    private cdr: ChangeDetectorRef // Added ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private cartService:CartService,
+    private loginService:LoginService,
+    private router:Router,
+    private location:Location
  ) {}
 
  ngOnInit(): void {
@@ -87,18 +103,28 @@ export class ReadComponent implements OnInit {
  }
 
  decreaseQuantity(): void {
-    if (this.book.quantity > 1) {
-      this.book.quantity--;
+    if (this.quantitySelected > 1) {
+      this.quantitySelected--;
     }
  }
 
  increaseQuantity(): void {
-    this.book.quantity++;
+    this.quantitySelected++;
  }
 
  addToCart(): void {
-    //TODO Placeholder to add the book to the cart
-    console.log('Book added to cart:', this.book);
+    if(this.quantitySelected == 0)
+      return;  
+    var email = this.loginService.getUtenteSessione().email;
+    this.cartService.insert(email, this.bookId, this.quantitySelected).subscribe({
+      next:(res) => {
+        this.cartBookModel.id = res.id;
+        this.cartBookModel.user = res.user;
+        this.cartBookModel.book=res.book;
+        this.cartBookModel.quantitySelected=this.quantitySelected;
+        this.cartService.addBookInCart(this.cartBookModel);
+      },
+    });
  }
 
  convertBinaryToBase64(binaryData: any) {
@@ -111,4 +137,8 @@ export class ReadComponent implements OnInit {
     };
     console.log(this.tiles[1].imgUrl);
  }
+
+ goBack(){
+  this.location?.back();
+}
 }

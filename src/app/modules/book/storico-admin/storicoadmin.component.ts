@@ -18,7 +18,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LibraryService } from 'src/app/services/library.service';
 import { deleteproduct } from 'src/app/shared/delete-product/deleteproduct.component';
 
-
+deleteproduct
 /** Una classe per il componente del layout quando non si è loggati */
 @Component({
   standalone: true,

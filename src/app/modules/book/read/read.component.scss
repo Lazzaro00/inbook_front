@@ -1,4 +1,6 @@
-/* read.component.scss */
+
+@import "../../../../assets/scss/variables.scss";
+
 .book-details {
   max-width: 800px;
   margin: auto;
@@ -85,4 +87,8 @@ button.addToCart {
   gap: 10px;
   height: 18vw;
   width: 12vw;
+}
+
+.butto{
+  color: $secondary-color;
 }

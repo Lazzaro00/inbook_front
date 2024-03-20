@@ -1,3 +1,5 @@
+<button class="butt" (click)="goBack()">Torna Indietro</button>
+
 <div class="containerbis">
   <div class="container">
   <div class="images">
@@ -32,10 +34,10 @@
     <p>{{ book.description }}</p>
     <div class="container-quantita">
       <div class="quantita"> 
-        <button [disabled]="book.quantity <= 1">
+        <button [disabled]="quantitySelected <= 1">
           <img (click)="decreaseQuantity()" class="iconplus" src="../../../../assets/icons/meno.ico">
         </button>
-        <div class="quantity">{{ book.quantity }}</div>
+        <div class="quantity">{{ quantitySelected }}</div>
         <button>
           <img (click)="increaseQuantity()" class="iconplus" src="../../../../assets/icons/plus.ico">
         </button>

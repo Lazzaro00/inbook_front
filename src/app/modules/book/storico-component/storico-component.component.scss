@@ -1,3 +1,26 @@
-.paginable{
-    padding-top: 10vw;
+@import './../../../../assets/scss/variables.scss';
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+.totbook{
+    
+    height: 200px;
+    width: 20vw;
+    padding-left: 20px;
+    background-color: $white;
+}
+
+.graph{
+    scale: 1.1;
+    width: 80vw;
+    background-color: $white;
+}
+
+.paginable {
+    padding: 10%;
+    background-color: $white;
+}
 }

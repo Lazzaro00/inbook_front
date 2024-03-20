@@ -55,4 +55,9 @@ export class LibraryService {
     const url = `${this.baseUrl}/registration`;
     return this.http.post<any>(url, payload);
   }
+
+  getSales(id: string){
+    const url = `${this.baseUrl}/getSales?libraryId=${id}`;
+    return this.http.get<any>(url);
+  }
 }

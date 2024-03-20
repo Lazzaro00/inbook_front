@@ -1,4 +1,7 @@
-.generic-table-container {
+@import './../../../../assets/scss/variables.scss';
+
+.container {
   margin-top: 20px; /* Aggiungi spazio sopra la tabella */
   width: 100%; /* Assicura che la larghezza sia al 100% */
+  background-color: $white;
 }

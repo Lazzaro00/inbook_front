@@ -13,8 +13,6 @@ export class Interceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Puoi eseguire operazioni prima che la richiesta raggiunga il server
-    console.log('Intercepted request:', request);
 
     // Modifica della richiesta aggiungendo un'intestazione
     const modifiedRequest = request.clone({
