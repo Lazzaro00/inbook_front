@@ -19,10 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('../../shared/end-order/end-order.component').then((m) => m.EndOrder)
       },
 
-      // {
-      //   path:"historical",
-      //   loadComponent:() => import("../../modules/user/components/historical/historical.component").then((m) => m.Historical)
-      // },
+       {
+         path:"editProfile",
+         loadComponent:() => import("../../shared/edit-profile/edit-profile.component").then((m) => m.EditProfile)
+        },
             {
         path:'book',
         loadChildren:()=>

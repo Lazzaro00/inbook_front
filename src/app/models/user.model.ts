@@ -19,6 +19,7 @@ export interface loggedModelRequest{
 }
 
 export interface loggedModelResponse{
+    id:number;
     email:String;
     usertype:String;
 }
