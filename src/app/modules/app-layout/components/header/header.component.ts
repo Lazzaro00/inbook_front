@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { UtentiService } from 'src/app/services/utenti.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { LoginService } from 'src/app/services';
@@ -38,6 +38,7 @@ export class HeaderComponent {
   sessioneUtente!: SessioneUtenteModel;
   /** Indica se l'utente è ADMIN */
   isAdmin!: boolean;
+  completeName!:string;
 
   /**
    * Il costruttore della classe.
@@ -50,7 +51,8 @@ export class HeaderComponent {
     public loginService: LoginService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utentiService:UtentiService
   ) {}
 
   /**
@@ -61,6 +63,9 @@ export class HeaderComponent {
   ngOnInit(): void {
     // this.isAdmin = this.loginService.isAdmin();
      this.sessioneUtente = this.loginService.getUtenteSessione();
+     this.utentiService.getAnagByMail(this.sessioneUtente.email).subscribe((res:any) => {
+      this.completeName = res.name + " " + res.surname;
+     })
     // this.nominativoUtenteListener = this.loginService
     //   .updateNominativoUtenteListener()
     //   .subscribe((res: SessioneUtenteModel) => {
