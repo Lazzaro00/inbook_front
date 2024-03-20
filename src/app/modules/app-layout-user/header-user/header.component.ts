@@ -45,6 +45,7 @@ export class HeaderComponentUser {
   /** Indica se l'utente è ADMIN */
   isAdmin!: boolean;
   dialogRef: MatDialogRef<Cart> | undefined;
+  completeName!: string;
 
   /**
    * Il costruttore della classe.
@@ -69,6 +70,9 @@ export class HeaderComponentUser {
   ngOnInit(): void {
     // this.isAdmin = this.loginService.isAdmin();
      this.sessioneUtente = this.loginService.getUtenteSessione();
+     this.utentiService.getAnagByMail(this.sessioneUtente.email).subscribe((res:any) => {
+      this.completeName = res.name + " " + res.surname;
+     })
      this.getProfileImage();
     this.nominativoUtenteListener = this.loginService
       .updateNominativoUtenteListener()
