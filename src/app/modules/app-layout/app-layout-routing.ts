@@ -18,6 +18,10 @@ export const routes: Routes = [
         path: 'book',
         loadChildren: () => import('../book/book-routing').then((m) => m.routes),
       },
+      {
+        path:'adminprofile',
+        loadChildren:() => import('../admin-profile/admin-profile.routing').then((m) => m.routes),
+      },
       
       // {
       //   path:'book',

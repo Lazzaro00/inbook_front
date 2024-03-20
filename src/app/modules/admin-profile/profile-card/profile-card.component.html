@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="info-table">
+      <tr>
+        <td colspan="4">
+            <h3>{{ aData?.name }} {{ aData?.surname }}</h3>
+        </td>
+        <td>
+            <button id="editButton" (click)="anagEdit(aData?.id)" mat-button>
+              <b>MODIFICA</b>
+            </button>
+        </td>
+      </tr>
+      <tr>
+        <td><b>EMAIL</b></td>
+        <td><b>GENERE</b></td>
+        <td><b>DATA DI NASCITA</b></td>
+        <td><b>DATI DI RESIDENZA</b></td>
+    </tr>
+    <tr>
+        <td>{{ aData?.user?.email }}</td>
+        <td>{{ aData?.gender }}</td>
+        <td>{{ aData?.birth_date }}</td>
+        <td>{{ aData?.address }} - {{ aData?.city }} ({{ aData?.province }})</td>
+    </tr>
+    </table>
+  </div>
+  
