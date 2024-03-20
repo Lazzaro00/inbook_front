@@ -1,0 +1,7 @@
+<h3>Il Tuo Profilo</h3>
+
+<router-outlet></router-outlet>
+
+<div *ngFor="let library of yourLibraries">
+  <app-library-card [id]="library.id"></app-library-card>
+</div>

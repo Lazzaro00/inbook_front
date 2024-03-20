@@ -15,10 +15,10 @@ export const SIDENAV_MENU_CONSTANT = [
     ]
   },
   {
-    wip: true,
+    wip:false,
     name: 'Il tuo profilo',
     icon: 'person',
-    path: '/login/profile',
+    path: '/gestionale/adminprofile',
   },
   {
     name: 'Prodotti',

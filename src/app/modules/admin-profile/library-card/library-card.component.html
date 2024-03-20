@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="info-table">
+      <tr>
+        <td colspan="4">
+            <h3>Biblioteca {{ details?.name }}</h3>
+        </td>
+        <td style="width: 10px;">
+            <button (click)="edit(details?.id)" mat-button>
+              <b>MODIFICA</b>
+            </button>
+        </td>
+      </tr>
+      <tr>
+        <td><b>INDIRIZZO</b></td>
+        <td><b>DESCRIZIONE</b></td>
+    </tr>
+    <tr>
+        <td>{{details?.address}}, {{details?.city}} - {{details?.province}}</td>
+        <td>{{details?.description}}</td>
+    </tr>
+    </table>
+  </div>
+  
