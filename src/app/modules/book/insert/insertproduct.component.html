@@ -1,65 +1,71 @@
 <div class="containerbis">
-<div class="container">
-
-<div class="image">
-    <label class="image-upload-container btn btn-bwm">
+  <div class="container">
+    <div class="image">
+      <img style="max-width: 20vw;" [src]="imageURL ? imageURL : inserimentoLibro.get('images')!.value" *ngIf="imageURL" alt="Uploaded Image">
+      <label class="image-upload-container btn btn-bwm">
         <span>Select Image</span>
-        <input #imageInput
-                type="file"
-                accept="image/*"
-                formControlName="images">
-        </label>
-</div>
-
-
-<div class="details">
-<form class="example-form" [formGroup]="inserimentoLibro">
-    <mat-form-field class="example-width">
-        <mat-label>Nome prodotto</mat-label>
-        <input matInput formControlName="name" required >
-    </mat-form-field>
-
-    <table class="example-full-width" cellspacing="0"><tr>
-        <td><mat-form-field class="example-full-width">
-          <mat-label>Categoria</mat-label>
-          <input matInput formControlName="category" required>
-        </mat-form-field></td>
-        <td><mat-form-field class="example-full-width">
-          <mat-label>Costo</mat-label>
-          <input matInput formControlName="price" required type="double">
-        </mat-form-field></td>
-        <td><mat-form-field class="example-full-width">
-            <mat-label>Codice prodotto</mat-label>
-            <input matInput formControlName="serialcode" required>
-          </mat-form-field></td>
-          <td><mat-form-field class="example-full-width">
-            <mat-label>Quantità</mat-label>
-            <input matInput formControlName="quantity" required type="number">
-          </mat-form-field></td>
-      </tr></table>
-
-      <mat-form-field>
-          <mat-label>Libreria</mat-label>
-          <mat-select formControlName="library">
-              <mat-option
-              *ngFor="let option of listaLibrary"
-              [value]="option"
-              >
-              {{ option.name | titlecase }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-      <mat-form-field class="example-width">
-        <mat-label>Descrizione</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-      </mat-form-field>
-
-    <div class="buttons-container">
-      <button mat-raised-button color="primary" class="right-button" (click)="saveProduct()">Salva</button>
+        <input #imageInput type="file" accept="image/*" formControlName="images" (change)="handleFileInput($event)">
+      </label>
     </div>
 
-</form>
-</div>
-</div>
+    <form class="example-form" [formGroup]="inserimentoLibro">
+      
+      
+      <div class="details">
+        <mat-form-field class="example-width">
+          <mat-label for="name">Nome prodotto</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Categoria</mat-label>
+                <input matInput formControlName="category" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Costo</mat-label>
+                <input matInput formControlName="price" required type="number">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Codice prodotto</mat-label>
+                <input matInput formControlName="serialcode" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Quantità</mat-label>
+                <input matInput formControlName="quantity" required type="number">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <mat-form-field>
+          <mat-label>Libreria</mat-label>
+          <mat-select formControlName="library">
+            <mat-option *ngFor="let option of library" [value]="option.id">
+              {{ option.name | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-width">
+          <mat-label>Descrizione</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div class="buttons-container">
+          <button mat-raised-button color="primary" class="right-button" (click)="saveProduct()">
+            {{ isModifica ? "Modifica" : "Inserisci" }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

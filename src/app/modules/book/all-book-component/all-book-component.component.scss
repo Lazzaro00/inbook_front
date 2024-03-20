@@ -1,4 +1,29 @@
-.p{
-    height: 10px;
+@import './../../../../assets/scss/variables.scss';
+
+.totbook {
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 20vw;
+    padding-left: 20px;
+    background-color: $white;
     
-}
+    .testo {
+        position: absolute;
+        top: 25%;
+        left: 12%;
+        margin: 0;
+        color: black; // Cambia colore a tuo piacimento
+        font-size: 24px; // Cambia dimensione del carattere a tuo piacimento
+        }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+    }      
+}  
+
+
+
+
+

@@ -17,6 +17,7 @@ import { UtentiService } from 'src/app/services/utenti.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { LibraryService } from 'src/app/services/library.service';
 import { deleteproduct } from 'src/app/shared/delete-product/deleteproduct.component';
+import { InsertProduct } from '../insert/insertproduct.component';
 
 deleteproduct
 /** Una classe per il componente del layout quando non si è loggati */
@@ -26,6 +27,7 @@ deleteproduct
   templateUrl: './storicoadmin.component.html',
   styleUrls: ['./storicoadmin.component.scss'],
   imports: [RouterModule, AngularMaterialModule, MatCardModule,MatIconModule, GenericTableComponent, AppLayoutComponent, CommonModule,],
+  providers:[InsertProduct]
 })
 export class storicoadmin {
 
@@ -51,6 +53,7 @@ export class storicoadmin {
   datePipe: any;
   iduser:Number = 0;
   book:number = 0;
+  isModifica:boolean = false;
 
   constructor(
     private buyService : BuyService,
@@ -59,6 +62,7 @@ export class storicoadmin {
     private libraryService:LibraryService,
     private bookService:BookService,
     private router: Router,
+    private insertproduct:InsertProduct,
     private dialog: MatDialog
     ){}
 
@@ -75,7 +79,6 @@ export class storicoadmin {
 
   async getDataFromResolver() {
     const res = await this.bookService.getByLibraryId(this.idLibrary, 0, 25).toPromise();
-    console.log(res)
        this.totalElements = res.totalElements;
        this.pageIndex = res.pageIndex;
        this.bookList = res.content;
@@ -90,7 +93,6 @@ export class storicoadmin {
    getMappedDataSource(toMap: any[]) {
     
     return toMap.map((r) => {
-      console.log(r)
       const action = [
         
         {
@@ -103,7 +105,7 @@ export class storicoadmin {
             title: LABEL_CONSTANT.modifica,
             icon: ICON_CONSTANT.edit,
             type: 'icon',
-           // callback: () => this.OpenOrder(),
+            callback: () => this.edit(r.id),
         },
         {
           title: LABEL_CONSTANT.elimina,
@@ -126,19 +128,19 @@ export class storicoadmin {
   }
 
   read(idBo: number){
-
     if(idBo != null){
       let navigationExtras: NavigationExtras = {
         queryParams: {
-          
             id: idBo
         }
       };
-      // qua bisogna passare l'id poi fare una read e popolaer i campi di book/read
       this.router.navigate(['user/book/read'], navigationExtras);
     }
+  }
 
-
+  edit(id:number){
+    this.bookService.editProduct(id);
+    this.router.navigate(['user/book/insert-product'])
   }
 
   delete(idB: number){

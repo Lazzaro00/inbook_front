@@ -138,7 +138,7 @@ export class ReadComponent implements OnInit {
     console.log(this.tiles[1].imgUrl);
  }
 
- goBack(){
+  goBack(){
   this.location?.back();
-}
+  }
 }

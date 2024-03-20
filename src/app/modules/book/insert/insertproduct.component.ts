@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class InsertProduct implements OnInit {
   inserimentoLibro: FormGroup;
-  listaLibrary: any[] = [];
+  library: any[] = [];
+  isModifica:boolean = false;
+  imageURL: string | ArrayBuffer | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class InsertProduct implements OnInit {
     private fb:FormBuilder,
     private libraryService: LibraryService,
     private loginSevice:LoginService,
+    private router: Router,
     ) { 
       this.inserimentoLibro = this.fb.group({
         id: [""],
@@ -38,7 +41,7 @@ export class InsertProduct implements OnInit {
         serialcode:["", Validators.required],
         quantity:["", Validators.required],
         description:["", Validators.required],
-        library:[ ],
+        library:[],
       });
       
     }
@@ -48,18 +51,57 @@ export class InsertProduct implements OnInit {
     let email = (this.loginSevice.getUtenteSessione()).email
     this.libraryService.getLibraryByEmail(email).subscribe({
       next: (res) =>{
-        this.listaLibrary = res;
-        console.log(res)
-    }
-  })
+        this.library = res;
+      }
+    })
+
+    setTimeout(()=> {
+      if(this.bookService.inserimentoLibro.value.id != null){
+        console.log(this.bookService.inserimentoLibro.value)
+        this.inserimentoLibro = this.bookService.inserimentoLibro;
+        this.inserimentoLibro.patchValue({                                      //fatto perche non mi mette la libreria durante la modifica
+          library: this.bookService.inserimentoLibro.value.library
+        })
+        this.imageURL = this.bookService.inserimentoLibro.value.images;
+        this.isModifica = true;
+        }else{
+        this.isModifica = false;
+        console.log("form vuoto, quindi inserimento")
+       }
+
+    }, 1)
+  }
+
+  ngOnDestroy(): void {
+    this.inserimentoLibro.reset();
+    this.isModifica = false;
   }
 
   saveProduct(){
     this.bookService.insertBook(this.inserimentoLibro.value).subscribe({
-        next: () =>{console.log("inserimento", this.inserimentoLibro.value)},
+        next: () =>{
+          console.log("inserimento", this.inserimentoLibro.value);
+          this.inserimentoLibro.reset();
+          this.isModifica = false;
+          this.router.navigate(['gestionale/book/storico-admin'])
+        },
         error: (e) => {console.log("inserimento andato in errore per colpa di:", e)}
     })
   }
 
+  handleFileInput(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imageURL = reader.result;
+        // Aggiorna l'URL dell'immagine nel campo del form
+        this.inserimentoLibro.patchValue({
+          images: reader.result
+        });
+      };
+    }
+  }
   
 }

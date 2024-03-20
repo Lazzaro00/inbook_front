@@ -3,19 +3,23 @@
 .container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between; /* Aggiunto per spaziare gli elementi */
     padding: 10px;
 
 .totbook{
-    
+    display: flex; /* Per centrare il contenuto */
+    justify-content: center; /* Per centrare il contenuto */
+    align-items: center; /* Per centrare il contenuto */
     height: 200px;
     width: 20vw;
     padding-left: 20px;
     background-color: $white;
+    margin-right: 10vw;
 }
 
 .graph{
-    scale: 1.1;
-    width: 80vw;
+    width: 35vw;
+    height: 13vw;
     background-color: $white;
 }
 
