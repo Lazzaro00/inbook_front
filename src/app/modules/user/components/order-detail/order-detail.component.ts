@@ -93,6 +93,7 @@ export class OrderDetail {
 
   totalPrice(){
     this.filteredList.forEach(element =>{
+      if (element.book.price)
       this.total += element.book.price;
     }
       

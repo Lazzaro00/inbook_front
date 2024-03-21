@@ -15,11 +15,11 @@ export interface bookModelRequest{
 export interface bookModelResponse{
     id:number;
     images:number[];
-    name:string;
-    category:string;
-    price:number;
-    serialcode:string;
+    name?:string;
+    category?:string;
+    price?:number;
+    serialcode?:string;
     quantity:number;
-    description:string;
+    description?:string;
     library:libraryModelResponse;
 }
