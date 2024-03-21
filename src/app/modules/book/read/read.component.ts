@@ -50,6 +50,8 @@ export class ReadComponent implements OnInit {
   quantitySelected:0
 };
 
+  isAdmin:boolean = true;
+
  constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
@@ -74,6 +76,9 @@ export class ReadComponent implements OnInit {
           this.loadBookDetails(this.bookId);
         }
       });
+    }
+    if(this.loginService.getUtenteSessione().usertype === "ADMIN"){
+      this.isAdmin = false;
     }
  }
 

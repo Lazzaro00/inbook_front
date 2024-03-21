@@ -116,16 +116,17 @@ export class Historical {
 
   matchRow(list:buyModelResponse[]){
     let newList: order[] = [];
+    console.log("LISTA",list);
     list.forEach((element: any) => {
       let index = newList.findIndex(item => item.orderNum === element.orderNum);
       if(index === -1){
       newList.push({
         orderNum: element.orderNum,
         date : element.date,
-        priceOrder : element.book.price
+        priceOrder : element.book ? element.book.price : 0
       });
       }else{
-        newList[index].priceOrder += element.book.price
+        newList[index].priceOrder += element.book ? element.book.price : 0
       }
   });
   return newList;

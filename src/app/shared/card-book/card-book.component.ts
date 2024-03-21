@@ -23,7 +23,7 @@ export class CardBook {
   id:number = 0;
 
   @Input()
-  img:String = '';
+  image:String = "../../../../../assets/images/book.png";
 
   @Input()
   title: String = '';
@@ -54,6 +54,12 @@ export class CardBook {
     private loginService: LoginService
     ){}
 
+    ngOnInit(){
+      if(this.image == null)
+      this.image = "../../../../../assets/images/book.png"
+    else
+      this.image = "data:image/jpeg;base64,"+this.image;
+    }
   increase() {
     this.quantitySelected++;
     this.button = false;

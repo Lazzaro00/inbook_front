@@ -38,6 +38,7 @@ export class GetAllBook {
       next: res => {
         this.listBooks = res.content;
         this.bookNotFiltered = res.content;
+        console.log("BookNoFiltered ", this.bookNotFiltered);
       }
     });
 

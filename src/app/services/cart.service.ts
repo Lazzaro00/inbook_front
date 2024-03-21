@@ -102,5 +102,12 @@ export class CartService {
     this.total = this.subtotal;
   }
 
+  whichBuyable(){
+    const url = `${this.baseUrl}/whichBuyable`;
+    this.riepilogo = this.bookInCart;
+    console.log(this.bookInCart)
+    return this.http.post<any>(url,this.bookInCart);
+  }
+
   
 }

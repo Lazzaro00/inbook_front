@@ -1,4 +1,4 @@
-<button class="butt" (click)="goBack()">< INDIETRO</button>
+<button class="butt" (click)="goBack()" *ngIf="isAdmin">< INDIETRO</button>
 
 <div class="containerbis">
   <div class="container">
@@ -32,8 +32,8 @@
 
     <p style="color: #b0b0b0;"><strong>DESCRIZIONE:</strong> </p>
     <p>{{ book.description }}</p>
-    <div class="container-quantita">
-      <div class="quantita"> 
+    <div class="container-quantita" *ngIf="isAdmin">
+      <div class="quantita" *ngIf="isAdmin"> 
         <button [disabled]="quantitySelected <= 1">
           <img (click)="decreaseQuantity()" class="iconplus" src="../../../../assets/icons/meno.ico">
         </button>
@@ -48,6 +48,7 @@
   </div>
 </div>
 
+<div *ngIf="isAdmin">
 <h3><strong>Prodotti correlati</strong></h3>
 <div id="getallbook">
   <app-card-book
@@ -57,6 +58,8 @@
     [title]="book.name"
     [category]="book.category"
     [price]=book.price
+    [image]="book.images"
   ></app-card-book>
+</div>
 </div>
 </div>

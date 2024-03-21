@@ -1,6 +1,8 @@
 
   <mat-card class="card">
-    <img (click)="openRead()" mat-card-image src="../../../../../assets/images/book.png" alt="Descrizione dell'immagine">
+    <div class="image-container">
+    <img (click)="openRead()" mat-card-image [src]="image" alt="Descrizione dell'immagine" class="image" style="object-fit: cover;">
+  </div>
     <mat-card-header>
       <mat-card-title (click)="openRead()">{{title}}</mat-card-title>
       <mat-card-subtitle>{{category}}</mat-card-subtitle>

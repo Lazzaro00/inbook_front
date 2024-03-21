@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 import { AngularMaterialModule } from 'src/app/utils';
 
-import { Router, RouterModule, NavigationExtras  } from '@angular/router';
+import { Router, RouterModule, NavigationExtras, ActivatedRoute  } from '@angular/router';
 import { LoginService } from 'src/app/services';
 import { UtentiService } from 'src/app/services/utenti.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -35,7 +35,7 @@ export class EditProfile {
   ]
   
   constructor(
-    private router:Router, 
+    private location:Location, 
     private utentiService: UtentiService,
     private loginService:LoginService,
     private fb: FormBuilder,
@@ -115,7 +115,8 @@ export class EditProfile {
         if (oldUser.email !== res.user.email){
           this.loginService.setUtenteSession(res.user.email.toString(), oldUser.usertype, res.user.jwt.toString());
         }
-        this.router.navigateByUrl('/gestionale/adminprofile');
+        this.location.back();
+        
       },})
     } else {
       this.notifService.show("Password e conferma password obbligatori", 5000, "error");
@@ -123,7 +124,7 @@ export class EditProfile {
   }
 
   delete(){
-    this.utentiService.delete(this.id).subscribe({
+    this.utentiService.delete(this.iduser).subscribe({
       next:(res) => {
         this.loginService.logout();
       },

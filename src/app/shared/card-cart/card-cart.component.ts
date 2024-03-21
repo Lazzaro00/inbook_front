@@ -36,6 +36,16 @@ export class CardCart {
   @Input()
   cart:boolean = true;
 
+  @Input()
+  image:string = "";
+
+  ngOnInit(){
+    if(this.book?.images == null)
+    this.image = "../../../../../assets/images/book.png"
+  else
+    this.image = "data:image/jpeg;base64,"+this.book?.images;
+  }
+
   openRead() {
     if(this.book != null){
     let navigationExtras: NavigationExtras = {

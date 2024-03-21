@@ -3,7 +3,7 @@
     <div  *ngIf="book != null"  class="card">
     <div class="card">
       <div>
-        <img (click)="openRead()" mat-card-image src="../../../../../assets/images/book.png" alt="Descrizione dell'immagine">
+        <img (click)="openRead()" mat-card-image [src]="image" alt="Descrizione dell'immagine" class="image">
       </div>
       <div id="title_quantity">
           <h4 class="text">{{book.name}}</h4>
@@ -12,7 +12,7 @@
       
   </div>
   <div class="price_trash">
-    <span >{{book.price}}</span>
+    <span >{{book.price}} €</span>
     <mat-icon (click)="deleteFromCart()" class="small" *ngIf="cart">delete</mat-icon>
   </div>
 </div>

@@ -39,12 +39,12 @@ export class storicoadmin {
   displayedColumns = TABLE_COLUMNS.storico_admin;
   azioniDiGruppo = TABLE_GROUP_ACTIONS_CONSTANT_VISUAL;
   cellHeadTypes = {
-    name: 'sort',
+    namep: 'sort',
     dateOrder: 'sort',
     priceOrder: 'sort',
   };
   sortedItems = {
-    name: false,
+    namep: false,
     dateOrder: false,
     priceOrder: false,
   };
@@ -116,7 +116,7 @@ export class storicoadmin {
       ];
       // Ritorniamo quindi per ogni elemento all'interno dell'array un nuovo oggetto che avrà come nomi delle variabili i nomi delle colonne
       return {
-        name: r.name,
+        namep: r.name,
         category: r.category,
         price: r.price,
         quantity: r.quantity,
@@ -134,13 +134,13 @@ export class storicoadmin {
             id: idBo
         }
       };
-      this.router.navigate(['user/book/read'], navigationExtras);
+      this.router.navigate(['gestionale/book/read'], navigationExtras);
     }
   }
 
   edit(id:number){
     this.bookService.editProduct(id);
-    this.router.navigate(['user/book/insert-product'])
+    this.router.navigate(['gestionale/book/insert-product'])
   }
 
   delete(idB: number){
