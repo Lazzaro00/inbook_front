@@ -7,7 +7,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'utenti',
+        redirectTo: 'adminprofile',
         pathMatch: 'full',
       },
       {
