@@ -20,7 +20,7 @@ import { registrationModelRequest } from 'src/app/models/registration.model';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfile {
-
+ user:boolean=false;
   private email:string='';
   private anagraphic:any;
   anagraphicForm:FormGroup;
@@ -70,8 +70,13 @@ export class EditProfile {
           id:res.user.id,
           email:res.user.email,
         });
+
+        if (res.user.usertype === "USER"){
+          this.user=true;
+        }
       },
     });
+    
   }
 
   setEdit(anagraphic:any){
@@ -103,7 +108,7 @@ export class EditProfile {
     console.log(this.anagraphicToSave);
     this.utentiService.saveAnagraphic(this.anagraphicToSave).subscribe({
       next:(res) => {
-        //this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/gestionale/adminprofile');
       },
     });
   }
@@ -111,7 +116,7 @@ export class EditProfile {
   delete(){
     this.utentiService.delete(this.id).subscribe({
       next:(res) => {
-        this.router.navigateByUrl('/');
+        this.loginService.logout();
       },
     });
   }

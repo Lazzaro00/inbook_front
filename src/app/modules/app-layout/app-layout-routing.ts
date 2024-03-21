@@ -22,6 +22,10 @@ export const routes: Routes = [
         path:'adminprofile',
         loadChildren:() => import('../admin-profile/admin-profile.routing').then((m) => m.routes),
       },
+      {
+        path:"editProfile",
+        loadComponent:() => import("../../shared/edit-profile/edit-profile.component").then((m) => m.EditProfile)
+       },
       
       // {
       //   path:'book',

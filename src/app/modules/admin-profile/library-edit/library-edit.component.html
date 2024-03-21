@@ -1,0 +1,60 @@
+<h3 style="padding-left: 20px;">Modifica Dati della Biblioteca</h3>
+<div class="details">
+  <div class="distance-between">
+    <span class="grey">Dati della Biblioteca</span>
+    <button mat-button class="save" (click)="save()">Salva</button>
+  </div>
+
+  <form [formGroup]="editing" class="example-form" >
+    <div class="example-width">
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" required >
+        </mat-form-field>
+    </div>
+    <div class="example-width">
+        <mat-form-field>
+            <mat-label>Indirizzo</mat-label>
+            <input matInput formControlName="address" required >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Città</mat-label>
+            <input matInput formControlName="city" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Provincia</mat-label>
+            <input matInput formControlName="province" required >
+        </mat-form-field>
+    </div>
+    <div class="example-width">
+        <mat-form-field>
+            <mat-label>Descrizione</mat-label>
+            <input matInput formControlName="description" required >
+        </mat-form-field>
+    </div>
+    <div class="example-width">
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" required type="{{ hidePassword ? 'password' : 'text' }}">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="confirm" required type="{{ hideConfirmPassword ? 'password' : 'text' }}">
+          <button mat-icon-button matSuffix (click)="toggleConfirmPasswordVisibility()">
+            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </form>
+
+  <div class="distance-between">
+  <div class="grey">
+    <h3>Eliminazione Biblioteca</h3>
+    <span>Puoi eliminare i dati della tua biblioteca</span>
+  </div>
+    <button mat-button class="delete" (click)="delete()">Elimina</button>
+  </div>
+</div>

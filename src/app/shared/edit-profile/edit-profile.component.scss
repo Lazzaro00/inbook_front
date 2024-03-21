@@ -1,7 +1,14 @@
+.external{
+  background-color: #eee;
+  padding-top: 10px;
+}
+
 .details {
+  margin: 30px;
   flex: 2;
   padding-right: 20px;
   max-width: 100%; 
+  background-color: #fff;
 }
 
 .example-width {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LibraryService } from 'src/app/services/library.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-library-card',
@@ -11,7 +12,7 @@ import { LibraryService } from 'src/app/services/library.service';
 export class LibraryCardComponent implements OnInit{
   details:any;
 
-  constructor(private libraryService:LibraryService){}
+  constructor(private libraryService:LibraryService, private router:Router){}
 
   @Input()
   id:number=0;
@@ -26,7 +27,7 @@ getData():void{
 }
 
 edit(id:number):void{
-
+  this.router.navigate(["gestionale/adminprofile/libraryedit"]);
 }
 
 

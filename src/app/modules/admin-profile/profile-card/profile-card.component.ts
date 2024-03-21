@@ -71,7 +71,7 @@ export class ProfileCardComponent {
     
      
 anagEdit(id: number){
-  
+  this.router.navigate(["/gestionale/editProfile"]);
 }    
     
 }
