@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 @Component({
   standalone:true,
   selector: 'insert-product',
-  templateUrl: './insertproduct.component.html',
+  templateUrl: './insertproduct.component.html', 
   styleUrls: ['./insertproduct.component.scss'],
   imports: [MatSelectModule,ReactiveFormsModule, CommonModule, MatButtonModule, MatGridListModule, MatFormFieldModule, MatInputModule, FormsModule],
 })
