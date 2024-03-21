@@ -28,7 +28,7 @@ export class LibraryService {
   }
 
   updateLibrary(payload: libraryModelResponse): Observable<libraryModelResponse> {
-    return this.http.put<libraryModelResponse>(`${this.baseUrl}/update`, payload);
+    return this.http.put<libraryModelResponse>(`${this.baseUrl}/updateP`, payload);
   }
 
   deleteLibrary(libId: number): Observable<any> {
