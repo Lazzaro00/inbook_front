@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LibraryService } from 'src/app/services/library.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-library-card',
@@ -27,7 +27,12 @@ getData():void{
 }
 
 edit(id:number):void{
-  this.router.navigate(["gestionale/adminprofile/libraryedit"]);
+  let navigationExtras: NavigationExtras = {
+    queryParams: {
+      id: this.id
+    }
+  };
+  this.router.navigate(["gestionale/libraryedit"], navigationExtras);
 }
 
 

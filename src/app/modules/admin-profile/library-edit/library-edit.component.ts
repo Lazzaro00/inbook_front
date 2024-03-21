@@ -11,7 +11,7 @@ import { AngularMaterialModule } from 'src/app/utils';
   templateUrl: './library-edit.component.html',
   styleUrls: ['./library-edit.component.scss'],
 })
-export class LibraryEditComponent{
+export class LibraryEditComponent {
 editing!:FormGroup;
 
 @Input()
@@ -25,17 +25,36 @@ constructor(
   private router:Router,
   
   ) { 
-    this.libraryService.readLibrary(this.id).subscribe((res)=>
     this.editing = this.fb.group({
-      id: this.id,
-      address: res.address,
-      province: res.province,
-      city: res.city,
-      description:res.description,
-      admins:res.admins,
+      id: "",
+      name: "",
+      address: "",
+      province: "",
+      city: "",
+      description:"",
+      admins:"",
       password:'',
+      confirm:'',
     })
-    )
+  }
+
+  ngOnInit():void{
+    this.route.queryParams.subscribe(params => {
+      this.id = +params['id']; 
+      this.libraryService.readLibrary(this.id).subscribe((res) =>
+        this.editing = this.fb.group({
+          id: this.id,
+          name: res.name,
+          address: res.address,
+          province: res.province,
+          city: res.city,
+          description: res.description,
+          admins: res.admins,
+          password: '',
+          confirm: '',
+        })
+      );
+    });
   }
 
 save():void{

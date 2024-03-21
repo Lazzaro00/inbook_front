@@ -26,6 +26,11 @@ export const routes: Routes = [
         path:"editProfile",
         loadComponent:() => import("../../shared/edit-profile/edit-profile.component").then((m) => m.EditProfile)
        },
+       {
+        path:'libraryedit',
+        loadComponent: () =>
+          import("../admin-profile/library-edit/library-edit.component").then((m) => m.LibraryEditComponent)
+      },
       
       // {
       //   path:'book',

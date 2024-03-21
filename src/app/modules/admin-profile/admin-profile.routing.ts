@@ -25,11 +25,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import("./library-card/library-card.component").then((m) => m.LibraryCardComponent)
       },
-      {
-        path:'libraryedit',
-        loadComponent: () =>
-          import("./library-edit/library-edit.component").then((m) => m.LibraryEditComponent)
-      }
+      
     ],
   },
 ];
