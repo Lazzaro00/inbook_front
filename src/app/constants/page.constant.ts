@@ -1,6 +1,12 @@
 /** Costante per il menù di navigazione laterale */
 export const SIDENAV_MENU_CONSTANT = [
   {
+    wip:false,
+    name: 'Il tuo profilo',
+    icon: 'person',
+    path: '/gestionale/adminprofile',
+  },
+  {
     name: 'Utenti',
     icon: 'group',
     childrenPath: [
@@ -15,14 +21,8 @@ export const SIDENAV_MENU_CONSTANT = [
     ]
   },
   {
-    wip:false,
-    name: 'Il tuo profilo',
-    icon: 'person',
-    path: '/gestionale/adminprofile',
-  },
-  {
     name: 'Prodotti',
-    icon: 'group',
+    icon: 'photo',
     childrenPath: [
       '/book/get-all-book'
     ],
