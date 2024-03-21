@@ -34,7 +34,7 @@ export class InsertProduct implements OnInit {
     ) { 
       this.inserimentoLibro = this.fb.group({
         id: [""],
-        images:['', Validators.required],
+        images:[''],
         name:["", Validators.required],
         category:["", Validators.required],
         price:["", Validators.required],
@@ -52,6 +52,7 @@ export class InsertProduct implements OnInit {
     this.libraryService.getLibraryByEmail(email).subscribe({
       next: (res) =>{
         this.library = res;
+        console.log(res)
       }
     })
 
@@ -59,9 +60,6 @@ export class InsertProduct implements OnInit {
       if(this.bookService.inserimentoLibro.value.id != null){
         console.log(this.bookService.inserimentoLibro.value)
         this.inserimentoLibro = this.bookService.inserimentoLibro;
-        this.inserimentoLibro.patchValue({                                      //fatto perche non mi mette la libreria durante la modifica
-          library: this.bookService.inserimentoLibro.value.library
-        })
         this.imageURL = this.bookService.inserimentoLibro.value.images;
         this.isModifica = true;
         }else{
@@ -69,7 +67,7 @@ export class InsertProduct implements OnInit {
         console.log("form vuoto, quindi inserimento")
        }
 
-    }, 1)
+    }, 500)
   }
 
   ngOnDestroy(): void {
@@ -78,14 +76,24 @@ export class InsertProduct implements OnInit {
   }
 
   saveProduct(){
+    let immage = this.inserimentoLibro.value.images;
+    let parts = immage.split(",");
+    let imm = parts[1]
+    this.inserimentoLibro.patchValue({
+      images: imm
+    })
     this.bookService.insertBook(this.inserimentoLibro.value).subscribe({
         next: () =>{
+          
           console.log("inserimento", this.inserimentoLibro.value);
           this.inserimentoLibro.reset();
           this.isModifica = false;
           this.router.navigate(['gestionale/book/storico-admin'])
         },
-        error: (e) => {console.log("inserimento andato in errore per colpa di:", e)}
+        error: (e) => {
+          console.log(this.inserimentoLibro.value)
+          console.log("inserimento andato in errore per colpa di:", e)
+        }
     })
   }
 
@@ -96,7 +104,6 @@ export class InsertProduct implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageURL = reader.result;
-        // Aggiorna l'URL dell'immagine nel campo del form
         this.inserimentoLibro.patchValue({
           images: reader.result
         });

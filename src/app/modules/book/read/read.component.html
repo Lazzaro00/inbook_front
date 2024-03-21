@@ -7,7 +7,7 @@
       <mat-grid-list cols="4" rowHeight="100px">
         <mat-grid-tile style="border-radius: 20px;" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
           
-            <img [src]="tile.imgUrl" alt="Book Image">
+            <img style="object-fit: cover;" [src]="tile.imgUrl" alt="Book Image">
           
         </mat-grid-tile>
       </mat-grid-list>
@@ -15,23 +15,23 @@
   </div>
 
   <div class="details">
-    <h2>{{ book.name }}</h2>
-    <p style="font-size: 30px; padding: 10px 0vw;">{{ book.price }} €<p>
+    <h2>{{ book?.name }}</h2>
+    <p style="font-size: 30px; padding: 10px 0vw;">{{ book?.price }} €<p>
     
     <div class="cat-cod">
       <div class="s-cat">
         <p style="color: #b0b0b0;"><strong>CATEGORIA:</strong></p>
-        <p>{{ book.category }}</p>
+        <p>{{ book?.category }}</p>
       </div>
 
       <div class="s-cat">
         <p style="color: #b0b0b0;"><strong>CODICE PRODOTTO:</strong></p>
-        <p>{{ book.serialcode }}</p>
+        <p>{{ book?.serialcode }}</p>
       </div>
     </div>
 
     <p style="color: #b0b0b0;"><strong>DESCRIZIONE:</strong> </p>
-    <p>{{ book.description }}</p>
+    <p>{{ book?.description }}</p>
     <div class="container-quantita">
       <div class="quantita"> 
         <button [disabled]="quantitySelected <= 1">

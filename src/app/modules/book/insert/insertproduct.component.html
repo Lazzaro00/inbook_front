@@ -49,7 +49,7 @@
         <mat-form-field>
           <mat-label>Libreria</mat-label>
           <mat-select formControlName="library">
-            <mat-option *ngFor="let option of library" [value]="option.id">
+            <mat-option *ngFor="let option of library" [value]="option">
               {{ option.name | titlecase }}
             </mat-option>
           </mat-select>

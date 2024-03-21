@@ -76,7 +76,7 @@ export class BookService {
           serialcode: res.serialcode,
           quantity: res.quantity,
           description: res.description,
-          library: res.library.id,
+          library: res.library,
         })
 
         console.log(this.inserimentoLibro.value)
