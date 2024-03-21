@@ -70,7 +70,7 @@ export class UtentiService {
   }
 
   saveAnagraphic(payload:registrationModelRequest){
-    let url = `${this.baseUrl}anag/update`;
+    let url = `${this.baseUrl}anag/save`;
     return this.http.put<registrationModelResponse>(url,payload);
   }
   

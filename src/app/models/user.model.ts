@@ -16,10 +16,12 @@ export interface userModelResponse{
 export interface loggedModelRequest{
     email:String;
     usertype:String;
+
 }
 
 export interface loggedModelResponse{
     id:number;
     email:String;
     usertype:String;
+    jwt:String;
 }
