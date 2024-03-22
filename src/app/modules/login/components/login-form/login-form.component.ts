@@ -98,6 +98,10 @@ export default class LoginFormComponent {
         '',
         [
           Validators.required,
+          // Validators.pattern(
+          //   /^[^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}](?:[\p{L}\p{N}\p{P}\p{S}][^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}][^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}])?$/
+    
+          // ),
           //Validators.minLength(8),
           Validators.maxLength(64),
         ],

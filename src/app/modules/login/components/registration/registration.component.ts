@@ -62,8 +62,24 @@ export class RegistrationComponent {
 
   
   registrationUserForm = this._formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    email: ['', [
+      Validators.required,
+      Validators.pattern(
+        /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/
+      ),
+      Validators.minLength(3),
+      Validators.maxLength(128),
+    ]],
+    password: ['',
+    [
+      Validators.required,
+      // Validators.pattern(
+      //   /^[^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}](?:[\p{L}\p{N}\p{P}\p{S}][^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}][^\uD800-\uDBFF\uDC00-\uDFFF\p{C}\p{Z}])?$/
+
+      // ),
+      //[Validators.minLength(8),
+      Validators.maxLength(64),
+    ]],
     confirm_password: ['', Validators.required],
     usertype: ['', Validators.required]
   });
@@ -203,7 +219,7 @@ export class RegistrationComponent {
         }).afterOpened().subscribe({
           next: () => {
             this.mostra = false;
-            this.router.navigate(["/gestionale"]);
+            this.router.navigate(["/login"]);
           }
         });
 
@@ -219,7 +235,7 @@ export class RegistrationComponent {
     this.libraryService.insertExistLibrary(payload).subscribe({
       next: (res) => {
         console.log("verifica andata a buon fine");
-        this.router.navigate(["/gestionale"]);
+        this.router.navigate(["/login"]);
       }, 
       error: (e) => {console.error("errore: " + e)}
     });
